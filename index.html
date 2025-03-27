@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreshPrep | Gourmet Meal Prep Delivered</title>
+    <title>ProteinChef | High-Protein Digital Cookbook</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* CSS Reset & Base Styles */
         :root {
-            --primary: #2ecc71;
-            --primary-dark: #27ae60;
+            --primary: #e74c3c;
+            --primary-dark: #c0392b;
             --secondary: #3498db;
             --dark: #2c3e50;
             --light: #ecf0f1;
-            --accent: #e74c3c;
+            --accent: #2ecc71;
             --gray: #95a5a6;
             --light-gray: #f8f9fa;
             --transition: all 0.3s ease;
@@ -182,7 +182,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80') no-repeat center center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1453&q=80') no-repeat center center/cover;
             color: white;
             display: flex;
             align-items: center;
@@ -213,47 +213,157 @@
             justify-content: center;
         }
 
-        /* Features Section */
-        .features {
+        /* Cookbook Showcase */
+        .cookbook-showcase {
             background-color: white;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        .showcase-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
         }
 
-        .feature-card {
-            background-color: var(--light-gray);
-            padding: 30px;
+        .showcase-img {
+            flex: 1;
+            position: relative;
+        }
+
+        .showcase-img img {
             border-radius: 10px;
-            text-align: center;
-            transition: var(--transition);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        .showcase-badge {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background-color: var(--accent);
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .feature-icon {
-            font-size: 3rem;
+        .showcase-content {
+            flex: 1;
+        }
+
+        .showcase-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .showcase-content ul {
+            margin-bottom: 30px;
+        }
+
+        .showcase-content li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .showcase-content i {
+            color: var(--accent);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
             color: var(--primary);
             margin-bottom: 20px;
         }
 
-        .feature-card h3 {
+        .price span {
+            font-size: 1rem;
+            color: var(--gray);
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        /* Recipe Categories */
+        .recipe-categories {
+            background-color: var(--light-gray);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .category-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .category-card:hover .category-img img {
+            transform: scale(1.1);
+        }
+
+        .category-content {
+            padding: 25px;
+        }
+
+        .category-title {
             font-size: 1.5rem;
             margin-bottom: 15px;
         }
 
-        /* Meal Plans Section */
-        .meal-plans {
+        .recipe-count {
+            display: inline-block;
             background-color: var(--light-gray);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
         }
 
-        .plans-tabs {
+        .recipe-list {
+            margin-bottom: 20px;
+        }
+
+        .recipe-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .recipe-list i {
+            color: var(--primary);
+        }
+
+        /* Sample Recipes */
+        .sample-recipes {
+            background-color: white;
+        }
+
+        .recipes-tabs {
             display: flex;
             justify-content: center;
             margin-bottom: 40px;
@@ -263,7 +373,7 @@
 
         .tab-btn {
             padding: 10px 25px;
-            background-color: white;
+            background-color: var(--light-gray);
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
@@ -280,130 +390,60 @@
             border-color: var(--primary);
         }
 
-        .plans-grid {
+        .recipes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        .plan-card {
-            background-color: white;
+        .recipe-card {
+            background-color: var(--light-gray);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
-        .plan-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .plan-img {
+        .recipe-img {
             height: 200px;
             overflow: hidden;
         }
 
-        .plan-img img {
+        .recipe-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition);
         }
 
-        .plan-card:hover .plan-img img {
-            transform: scale(1.1);
+        .recipe-content {
+            padding: 20px;
         }
 
-        .plan-content {
-            padding: 25px;
-        }
-
-        .plan-title {
-            font-size: 1.5rem;
+        .recipe-title {
+            font-size: 1.3rem;
             margin-bottom: 10px;
         }
 
-        .plan-price {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .plan-price span {
-            font-size: 1rem;
-            color: var(--gray);
-            font-weight: normal;
-        }
-
-        .plan-features {
-            margin-bottom: 25px;
-        }
-
-        .plan-features li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .plan-features li i {
-            color: var(--primary);
-        }
-
-        /* How It Works Section */
-        .how-it-works {
-            background-color: white;
-        }
-
-        .steps {
+        .recipe-meta {
             display: flex;
             justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-            position: relative;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--gray);
         }
 
-        .step {
-            flex: 1;
-            min-width: 250px;
-            text-align: center;
-            position: relative;
-            padding: 0 20px;
-        }
-
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 50%;
+        .recipe-meta span {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin: 0 auto 20px;
-            position: relative;
-            z-index: 2;
+            gap: 5px;
         }
 
-        .steps::before {
-            content: '';
-            position: absolute;
-            top: 30px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: var(--primary);
-            z-index: 1;
+        .recipe-meta i {
+            color: var(--primary);
         }
 
-        .step h3 {
-            font-size: 1.3rem;
+        .recipe-desc {
             margin-bottom: 15px;
+            font-size: 0.95rem;
         }
 
         /* Testimonials Section */
@@ -463,52 +503,70 @@
             font-size: 0.9rem;
         }
 
-        /* Newsletter Section */
-        .newsletter {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+        /* FAQ Section */
+        .faq {
+            background-color: white;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            background-color: var(--light-gray);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question i {
+            transition: var(--transition);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80') no-repeat center center/cover;
             color: white;
             text-align: center;
             padding: 100px 0;
         }
 
-        .newsletter h2 {
+        .cta h2 {
             font-size: 2.5rem;
             margin-bottom: 20px;
         }
 
-        .newsletter p {
+        .cta p {
             max-width: 600px;
             margin: 0 auto 30px;
             opacity: 0.9;
-        }
-
-        .newsletter-form {
-            display: flex;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 50px 0 0 50px;
-            font-size: 1rem;
-        }
-
-        .newsletter-form button {
-            padding: 15px 30px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 0 50px 50px 0;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .newsletter-form button:hover {
-            background-color: var(--primary-dark);
         }
 
         /* Footer */
@@ -614,17 +672,12 @@
                 font-size: 2.8rem;
             }
 
-            .steps::before {
-                display: none;
+            .showcase-container {
+                flex-direction: column;
             }
 
-            .step {
-                flex: 100%;
+            .showcase-img {
                 margin-bottom: 30px;
-            }
-
-            .step-number {
-                margin-bottom: 15px;
             }
         }
 
@@ -662,17 +715,6 @@
             .btn {
                 width: 100%;
             }
-
-            .newsletter-form {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .newsletter-form input,
-            .newsletter-form button {
-                border-radius: 50px;
-                width: 100%;
-            }
         }
 
         @media (max-width: 576px) {
@@ -693,7 +735,7 @@
                 font-size: 1rem;
             }
 
-            .plans-tabs {
+            .recipes-tabs {
                 flex-direction: column;
                 align-items: center;
             }
@@ -709,14 +751,14 @@
     <!-- Header -->
     <header id="header">
         <div class="container header-container">
-            <a href="#" class="logo">Fresh<span>Prep</span></a>
+            <a href="#" class="logo">Protein<span>Chef</span></a>
             <nav>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#plans">Meal Plans</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#cookbook">Cookbook</a></li>
+                    <li><a href="#recipes">Recipes</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -730,424 +772,284 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h1>Gourmet Meal Prep Delivered to Your Door</h1>
-                <p>Fresh, chef-prepared meals customized to your dietary needs. No cooking, no cleaning, just delicious nutrition.</p>
+                <h1>The Ultimate High-Protein Cookbook</h1>
+                <p>40 delicious, protein-packed recipes to fuel your fitness goals without sacrificing flavor or variety.</p>
                 <div class="hero-btns">
-                    <a href="#plans" class="btn">Choose Your Plan</a>
-                    <a href="#how-it-works" class="btn btn-outline">How It Works</a>
+                    <a href="#cookbook" class="btn">Get the Cookbook</a>
+                    <a href="#recipes" class="btn btn-outline">View Sample Recipes</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="section features" id="features">
+    <!-- Cookbook Showcase -->
+    <section class="section cookbook-showcase" id="cookbook">
         <div class="container">
-            <h2 class="section-title">Why Choose FreshPrep</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3>Fresh Ingredients</h3>
-                    <p>We source only the freshest, highest quality ingredients from local farms and trusted suppliers.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
-                    <h3>Chef-Crafted Meals</h3>
-                    <p>Our award-winning chefs create delicious, nutritionally balanced meals that never sacrifice flavor.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Save Time</h3>
-                    <p>Get back 10+ hours per week by eliminating meal planning, grocery shopping, and cooking.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3>Healthy Options</h3>
-                    <p>Choose from keto, paleo, vegan, gluten-free and other dietary preferences to match your lifestyle.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-recycle"></i>
-                    </div>
-                    <h3>Eco-Friendly</h3>
-                    <p>Our packaging is 100% recyclable and we maintain a zero-food-waste policy in our kitchens.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-truck"></i>
-                    </div>
-                    <h3>Flexible Delivery</h3>
-                    <p>Get meals delivered weekly or bi-weekly, with easy pause or cancellation options.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Meal Plans Section -->
-    <section class="section meal-plans" id="plans">
-        <div class="container">
-            <h2 class="section-title">Our Meal Plans</h2>
-            <div class="plans-tabs">
-                <button class="tab-btn active" data-category="all">All Plans</button>
-                <button class="tab-btn" data-category="weight-loss">Weight Loss</button>
-                <button class="tab-btn" data-category="muscle-gain">Muscle Gain</button>
-                <button class="tab-btn" data-category="plant-based">Plant Based</button>
-                <button class="tab-btn" data-category="family">Family Plans</button>
-            </div>
-            <div class="plans-grid">
-                <div class="plan-card" data-category="weight-loss">
-                    <div class="plan-img">
-                        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1453&q=80" alt="Lean & Clean Plan">
-                    </div>
-                    <div class="plan-content">
-                        <h3 class="plan-title">Lean & Clean</h3>
-                        <div class="plan-price">$11.99 <span>per meal</span></div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 1,200-1,500 calories/day</li>
-                            <li><i class="fas fa-check"></i> High protein, low carb</li>
-                            <li><i class="fas fa-check"></i> 5 meals per day</li>
-                            <li><i class="fas fa-check"></i> Weekly nutritionist consult</li>
-                            <li><i class="fas fa-check"></i> Free delivery</li>
-                        </ul>
-                        <a href="#" class="btn">Select Plan</a>
+            <div class="showcase-container">
+                <div class="showcase-img">
+                    <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="ProteinChef Cookbook">
+                    <div class="showcase-badge">
+                        <span>40<br>Recipes</span>
                     </div>
                 </div>
-                <div class="plan-card" data-category="muscle-gain">
-                    <div class="plan-img">
-                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="Performance Fuel Plan">
-                    </div>
-                    <div class="plan-content">
-                        <h3 class="plan-title">Performance Fuel</h3>
-                        <div class="plan-price">$13.99 <span>per meal</span></div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 2,800-3,200 calories/day</li>
-                            <li><i class="fas fa-check"></i> 40% protein, 40% carbs</li>
-                            <li><i class="fas fa-check"></i> 6 meals per day</li>
-                            <li><i class="fas fa-check"></i> Post-workout recovery meals</li>
-                            <li><i class="fas fa-check"></i> Free delivery</li>
-                        </ul>
-                        <a href="#" class="btn">Select Plan</a>
-                    </div>
-                </div>
-                <div class="plan-card" data-category="plant-based">
-                    <div class="plan-img">
-                        <img src="https://images.unsplash.com/photo-1543351611-58f69d7c1781?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Plant Power Plan">
-                    </div>
-                    <div class="plan-content">
-                        <h3 class="plan-title">Plant Power</h3>
-                        <div class="plan-price">$12.49 <span>per meal</span></div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 100% plant-based</li>
-                            <li><i class="fas fa-check"></i> 1,800-2,200 calories/day</li>
-                            <li><i class="fas fa-check"></i> 4 meals per day</li>
-                            <li><i class="fas fa-check"></i> High protein options</li>
-                            <li><i class="fas fa-check"></i> Free delivery</li>
-                        </ul>
-                        <a href="#" class="btn">Select Plan</a>
-                    </div>
-                </div>
-                <div class="plan-card" data-category="family">
-                    <div class="plan-img">
-                        <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Family Feast Plan">
-                    </div>
-                    <div class="plan-content">
-                        <h3 class="plan-title">Family Feast</h3>
-                        <div class="plan-price">$9.99 <span>per meal</span></div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 4-6 servings per meal</li>
-                            <li><i class="fas fa-check"></i> Kid-friendly options</li>
-                            <li><i class="fas fa-check"></i> 5 dinners + 3 lunches</li>
-                            <li><i class="fas fa-check"></i> Customizable preferences</li>
-                            <li><i class="fas fa-check"></i> Free delivery</li>
-                        </ul>
-                        <a href="#" class="btn">Select Plan</a>
-                    </div>
-                </div>
-                <div class="plan-card" data-category="weight-loss">
-                    <div class="plan-img">
-                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Keto Cut Plan">
-                    </div>
-                    <div class="plan-content">
-                        <h3 class="plan-title">Keto Cut</h3>
-                        <div class="plan-price">$12.99 <span>per meal</span></div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> <20g net carbs/day</li>
-                            <li><i class="fas fa-check"></i> High healthy fats</li>
-                            <li><i class="fas fa-check"></i> 3 meals + 2 snacks</li>
-                            <li><i class="fas fa-check"></i> Metabolic support</li>
-                            <li><i class="fas fa-check"></i> Free delivery</li>
-                        </ul>
-                        <a href="#" class="btn">Select Plan</a>
-                    </div>
-                </div>
-                <div class="plan-card" data-category="muscle-gain">
-                    <div class="plan-img">
-                        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1453&q=80" alt="Athlete's Edge Plan">
-                    </div>
-                    <div class="plan-content">
-                        <h3 class="plan-title">Athlete's Edge</h3>
-                        <div class="plan-price">$14.99 <span>per meal</span></div>
-                        <ul class="plan-features">
-                            <li><i class="fas fa-check"></i> 3,500-4,000 calories/day</li>
-                            <li><i class="fas fa-check"></i> Macro-optimized</li>
-                            <li><i class="fas fa-check"></i> 7 meals per day</li>
-                            <li><i class="fas fa-check"></i> Sports nutritionist support</li>
-                            <li><i class="fas fa-check"></i> Free delivery</li>
-                        </ul>
-                        <a href="#" class="btn">Select Plan</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="section how-it-works" id="how-it-works">
-        <div class="container">
-            <h2 class="section-title">How FreshPrep Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Choose Your Plan</h3>
-                    <p>Select from our variety of meal plans tailored to different dietary needs and goals.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Customize Your Meals</h3>
-                    <p>Tell us your preferences, allergies, and delivery schedule through your online account.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Chefs Prepare Your Meals</h3>
-                    <p>Our culinary team cooks your meals fresh using premium ingredients the day before delivery.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Delivery to Your Door</h3>
-                    <p>Receive your freshly prepared meals in insulated packaging to maintain perfect temperature.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">5</div>
-                    <h3>Heat & Enjoy</h3>
-                    <p>Simply heat your meals and enjoy restaurant-quality food in the comfort of your home.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="section testimonials" id="testimonials">
-        <div class="container">
-            <h2 class="section-title">What Our Customers Say</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        <p>FreshPrep has completely changed my relationship with food. As a busy lawyer, I never had time to cook healthy meals. Now I'm eating better than ever and have lost 15 pounds in 2 months!</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah J.">
-                        </div>
-                        <div class="author-info">
-                            <h4>Sarah J.</h4>
-                            <p>Customer for 8 months</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        <p>The muscle gain plan helped me bulk up while keeping my diet clean. The meals are delicious and perfectly portioned. I've seen better results in 3 months than I did in a year of trying to meal prep myself.</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael T.">
-                        </div>
-                        <div class="author-info">
-                            <h4>Michael T.</h4>
-                            <p>Customer for 5 months</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">
-                        <p>As a vegan, it's hard to find prepared meals that are both nutritious and flavorful. FreshPrep's plant-based options are incredible! My whole family loves them, even the meat-eaters.</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya K.">
-                        </div>
-                        <div class="author-info">
-                            <h4>Priya K.</h4>
-                            <p>Customer for 1 year</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="newsletter">
-        <div class="container">
-            <h2>Ready to Transform Your Eating Habits?</h2>
-            <p>Subscribe to our newsletter and get 15% off your first order plus weekly recipes and nutrition tips.</p>
-            <form class="newsletter-form">
-                <input type="email" placeholder="Enter your email address" required>
-                <button type="submit">Subscribe</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3>FreshPrep</h3>
-                    <p>Making healthy eating effortless with chef-prepared meals delivered to your door.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#plans">Meal Plans</a></li>
-                        <li><a href="#how-it-works">How It Works</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
+                <div class="showcase-content">
+                    <h2>ProteinChef: High-Protein Recipes for Every Meal</h2>
+                    <p>Our digital cookbook contains 40 carefully crafted recipes designed to help you hit your protein goals while enjoying every bite. Whether you're bulking, cutting, or maintaining, these recipes will become staples in your kitchen.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 10 High-Protein Breakfast Recipes</li>
+                        <li><i class="fas fa-check"></i> 10 Muscle-Building Lunch Recipes</li>
+                        <li><i class="fas fa-check"></i> 10 Protein-Packed Dinner Recipes</li>
+                        <li><i class="fas fa-check"></i> 10 Delicious Desserts & Snacks</li>
+                        <li><i class="fas fa-check"></i> Complete Macros & Nutrition Info</li>
+                        <li><i class="fas fa-check"></i> Meal Prep & Storage Tips</li>
+                        <li><i class="fas fa-check"></i> Instant Digital Download</li>
                     </ul>
+                    <div class="price">$29.99 <span>$49.99</span></div>
+                    <a href="#" class="btn">Buy Now</a>
                 </div>
-                <div class="footer-col">
-                    <h3>Company</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Our Chefs</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Press</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Shipping Policy</a></li>
-                        <li><a href="#">Returns & Refunds</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Contact Info</h3>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>123 Nutrition Way, San Francisco, CA 94107</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>(800) 555-HEALTH</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>hello@freshprep.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock"></i>
-                            <span>Mon-Fri: 8AM-8PM | Sat-Sun: 9AM-6PM</span>
-                        </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recipe Categories -->
+    <section class="section recipe-categories">
+        <div class="container">
+            <h2 class="section-title">Recipe Categories</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Breakfast Recipes">
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Breakfast</h3>
+                        <span class="recipe-count">10 Recipes</span>
+                        <ul class="recipe-list">
+                            <li><i class="fas fa-egg"></i> Protein Pancakes Stack</li>
+                            <li><i class="fas fa-bacon"></i> Steak & Eggs Skillet</li>
+                            <li><i class="fas fa-cheese"></i> High-Protein Breakfast Burrito</
+                    <h4>Maria S.</h4>
+                        <p>Competitive Powerlifter</p>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 FreshPrep. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="section faq" id="faq">
+    <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What format is the cookbook delivered in?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>The cookbook is delivered as a PDF file that you can download instantly after purchase. It's optimized for viewing on any device - computer, tablet, or smartphone. You'll also receive a mobile-friendly version for easy access in the kitchen.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Are the recipes suitable for my dietary needs?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>All recipes are high in protein and include complete nutrition information. We provide adaptations for common dietary preferences including gluten-free, dairy-free, and vegetarian options. Each recipe notes potential allergens and substitution suggestions.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What if I'm not a good cook?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Our recipes are designed for all skill levels with clear, step-by-step instructions. We include cooking tips and techniques throughout the book. Many recipes can be prepared in under 30 minutes with minimal equipment.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I print the cookbook?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! The PDF is print-friendly. We recommend printing just the recipes you use frequently or using a binder to create your own customized cookbook.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is there a money-back guarantee?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely. If you're not completely satisfied with your purchase within 30 days, we'll give you a full refund - no questions asked.</p>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        const header = document.getElementById('header');
+<!-- CTA Section -->
+<section class="cta">
+    <div class="container">
+        <h2>Ready to Transform Your Meals?</h2>
+        <p>Get instant access to 40 high-protein recipes today and start eating meals that fuel your fitness goals without sacrificing flavor.</p>
+        <a href="#" class="btn">Buy Now - $29.99</a>
+    </div>
+</section>
 
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
+<!-- Footer -->
+<footer id="contact">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>ProteinChef</h3>
+                <p>Creating delicious, high-protein recipes to help you achieve your fitness goals without compromising on taste.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#cookbook">Cookbook</a></li>
+                    <li><a href="#recipes">Recipes</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Protein Cooking Tips</a></li>
+                    <li><a href="#">Meal Prep Guide</a></li>
+                    <li><a href="#">Macro Calculator</a></li>
+                    <li><a href="#">Recipe Videos</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>support@proteinchef.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <span>www.proteinchef.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ProteinChef. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const header = document.getElementById('header');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+            ? '<i class="fas fa-times"></i>' 
+            : '<i class="fas fa-bars"></i>';
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
         });
+    });
 
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-        });
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+    // Recipe tabs filtering
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const recipeCards = document.querySelectorAll('.recipe-card');
 
-        // Meal plan tabs filtering
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const planCards = document.querySelectorAll('.plan-card');
-
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all buttons
-                tabBtns.forEach(btn => btn.classList.remove('active'));
-                // Add active class to clicked button
-                btn.classList.add('active');
-                
-                const category = btn.dataset.category;
-                
-                // Filter plans
-                planCards.forEach(card => {
-                    if (category === 'all' || card.dataset.category === category) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+            
+            const category = btn.dataset.category;
+            
+            // Filter recipes
+            recipeCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
                 }
             });
         });
-    </script>
-</body>
-</html>
+    });
+
+    // FAQ accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', () => {
+            // Close all other items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('active');
+        });
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+</script>            
