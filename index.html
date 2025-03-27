@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cosmic Cosmetics</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -49,17 +47,21 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        .product-container {
-            width: 100%;
-            height: 60vh;
-            position: relative;
+        .product-image {
+            width: 300px;
+            height: 300px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 10px 15px rgba(255, 107, 157, 0.2));
         }
 
         .product-info {
             text-align: center;
-            margin-top: 20px;
+            max-width: 500px;
         }
 
         .product-name {
@@ -74,10 +76,16 @@
             cursor: pointer;
             text-decoration: underline;
             transition: color 0.3s;
+            margin-bottom: 15px;
         }
 
         .product-price:hover {
             color: #ff3d7f;
+        }
+
+        .product-description {
+            color: #666;
+            line-height: 1.5;
         }
 
         /* Product Pages */
@@ -92,6 +100,14 @@
             display: none;
             z-index: 200;
             overflow-y: auto;
+            text-align: center;
+        }
+
+        .detail-image {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            margin: 20px auto;
         }
 
         .close-btn {
@@ -101,6 +117,22 @@
             font-size: 1.5em;
             cursor: pointer;
             color: #ff6b9d;
+        }
+
+        .buy-btn {
+            background: #ff6b9d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: #ff3d7f;
         }
     </style>
 </head>
@@ -113,28 +145,40 @@
 
     <!-- Product 1: Lip Balm -->
     <div class="product-section">
-        <div class="product-container" id="lipBalmContainer"></div>
+        <img src="https://i.imgur.com/JqYeZ0U.png" alt="Lip Balm" class="product-image">
         <div class="product-info">
             <div class="product-name">Angel's Kiss Lip Balm</div>
             <div class="product-price" onclick="showProductDetail('lip-balm')">$12.99</div>
+            <p class="product-description">
+                Nourishing lip balm with shea butter and vitamin E for silky smooth lips. 
+                Available in three heavenly flavors.
+            </p>
         </div>
     </div>
 
     <!-- Product 2: Face Balm -->
     <div class="product-section">
-        <div class="product-container" id="faceBalmContainer"></div>
+        <img src="https://i.imgur.com/mXjTzQY.png" alt="Face Balm" class="product-image">
         <div class="product-info">
             <div class="product-name">Heavenly Face Balm</div>
             <div class="product-price" onclick="showProductDetail('face-balm')">$24.99</div>
+            <p class="product-description">
+                Our signature face balm infused with rosehip oil to give your skin 
+                a divine glow that lasts all day.
+            </p>
         </div>
     </div>
 
     <!-- Product 3: Lotion -->
     <div class="product-section">
-        <div class="product-container" id="lotionContainer"></div>
+        <img src="https://i.imgur.com/vVXJQ3P.png" alt="Body Lotion" class="product-image">
         <div class="product-info">
             <div class="product-name">Divine Body Lotion</div>
             <div class="product-price" onclick="showProductDetail('lotion')">$22.50</div>
+            <p class="product-description">
+                Luxurious lotion with coconut oil and aloe vera for heavenly soft skin 
+                with a light floral fragrance.
+            </p>
         </div>
     </div>
 
@@ -142,98 +186,52 @@
     <div id="lip-balm" class="product-detail">
         <span class="close-btn" onclick="hideProductDetail('lip-balm')">×</span>
         <h1>Angel's Kiss Lip Balm</h1>
-        <p>Nourishing lip balm with shea butter and vitamin E for silky smooth lips.</p>
+        <img src="https://i.imgur.com/JqYeZ0U.png" alt="Lip Balm" class="detail-image">
         <p><strong>Flavors:</strong> Vanilla, Berry, Mint</p>
         <p><strong>Size:</strong> 10ml</p>
+        <p><strong>Key Benefits:</strong></p>
+        <ul style="text-align: left; display: inline-block;">
+            <li>Deeply moisturizes for 24 hours</li>
+            <li>Natural peppermint oil provides subtle plumping effect</li>
+            <li>Vegan and cruelty-free</li>
+        </ul>
         <p><strong>Price:</strong> $12.99</p>
-        <button>Add to Cart</button>
+        <button class="buy-btn">Add to Cart</button>
     </div>
 
     <div id="face-balm" class="product-detail">
         <span class="close-btn" onclick="hideProductDetail('face-balm')">×</span>
         <h1>Heavenly Face Balm</h1>
-        <p>Our signature face balm infused with rosehip oil to give your skin a divine glow.</p>
+        <img src="https://i.imgur.com/mXjTzQY.png" alt="Face Balm" class="detail-image">
         <p><strong>Key Ingredients:</strong> Rosehip oil, shea butter, vitamin E</p>
         <p><strong>Size:</strong> 50ml</p>
+        <p><strong>Key Benefits:</strong></p>
+        <ul style="text-align: left; display: inline-block;">
+            <li>Reduces appearance of fine lines</li>
+            <li>Non-greasy formula absorbs quickly</li>
+            <li>Dermatologist tested</li>
+        </ul>
         <p><strong>Price:</strong> $24.99</p>
-        <button>Add to Cart</button>
+        <button class="buy-btn">Add to Cart</button>
     </div>
 
     <div id="lotion" class="product-detail">
         <span class="close-btn" onclick="hideProductDetail('lotion')">×</span>
         <h1>Divine Body Lotion</h1>
-        <p>Luxurious lotion with coconut oil and aloe vera for heavenly soft skin.</p>
+        <img src="https://i.imgur.com/vVXJQ3P.png" alt="Body Lotion" class="detail-image">
         <p><strong>Fragrance:</strong> Light floral</p>
         <p><strong>Size:</strong> 200ml</p>
+        <p><strong>Key Benefits:</strong></p>
+        <ul style="text-align: left; display: inline-block;">
+            <li>48-hour hydration</li>
+            <li>Fast-absorbing, non-sticky formula</li>
+            <li>Paraben-free and hypoallergenic</li>
+        </ul>
         <p><strong>Price:</strong> $22.50</p>
-        <button>Add to Cart</button>
+        <button class="buy-btn">Add to Cart</button>
     </div>
 
     <script>
-        // Initialize 3D scenes for each product
-        const initProductScene = (containerId, modelPath) => {
-            const container = document.getElementById(containerId);
-            
-            // Scene setup
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            container.appendChild(renderer.domElement);
-
-            // Lighting
-            const light1 = new THREE.DirectionalLight(0xffffff, 0.8);
-            light1.position.set(1, 1, 1);
-            scene.add(light1);
-
-            const light2 = new THREE.AmbientLight(0xffffff, 0.5);
-            scene.add(light2);
-
-            // Load 3D model (placeholder - in reality you'd use actual GLB models)
-            const loader = new THREE.GLTFLoader();
-            let productModel;
-            
-            // Create placeholder geometry since we don't have actual models
-            let geometry;
-            if (containerId === 'lipBalmContainer') {
-                // Lip balm shape (short cylinder)
-                geometry = new THREE.CylinderGeometry(0.3, 0.3, 1, 32);
-            } else if (containerId === 'faceBalmContainer') {
-                // Face balm (jar shape - cylinder with wider top)
-                geometry = new THREE.CylinderGeometry(0.5, 0.4, 0.8, 32);
-            } else {
-                // Lotion bottle (taller cylinder)
-                geometry = new THREE.CylinderGeometry(0.4, 0.4, 1.5, 32);
-            }
-
-            const material = new THREE.MeshPhongMaterial({ 
-                color: 0xff6b9d,
-                transparent: true,
-                opacity: 0.9,
-                shininess: 30
-            });
-
-            const product = new THREE.Mesh(geometry, material);
-            scene.add(product);
-
-            camera.position.z = 3;
-
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                camera.aspect = container.clientWidth / container.clientHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(container.clientWidth, container.clientHeight);
-            });
-
-            // No rotation - static render
-            renderer.render(scene, camera);
-        };
-
-        // Initialize all product scenes
-        initProductScene('lipBalmContainer');
-        initProductScene('faceBalmContainer');
-        initProductScene('lotionContainer');
-
         // Product detail functions
         function showProductDetail(productId) {
             document.getElementById(productId).style.display = 'block';
@@ -245,4 +243,3 @@
     </script>
 </body>
 </html>
-
