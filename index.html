@@ -3,368 +3,1151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dylan's Dishes - Personalized Meal Plans</title>
+    <title>FreshPrep | Gourmet Meal Prep Delivered</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* (Keep all the same CSS styles from previous version) */
+        /* CSS Reset & Base Styles */
+        :root {
+            --primary: #2ecc71;
+            --primary-dark: #27ae60;
+            --secondary: #3498db;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+            --gray: #95a5a6;
+            --light-gray: #f8f9fa;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light-gray);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 15px auto;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80') no-repeat center center/cover;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--light-gray);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Meal Plans Section */
+        .meal-plans {
+            background-color: var(--light-gray);
+        }
+
+        .plans-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tab-btn {
+            padding: 10px 25px;
+            background-color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .tab-btn:not(.active):hover {
+            border-color: var(--primary);
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .plan-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .plan-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .plan-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .plan-card:hover .plan-img img {
+            transform: scale(1.1);
+        }
+
+        .plan-content {
+            padding: 25px;
+        }
+
+        .plan-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .plan-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: normal;
+        }
+
+        .plan-features {
+            margin-bottom: 25px;
+        }
+
+        .plan-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .plan-features li i {
+            color: var(--primary);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background-color: white;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            position: relative;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+            z-index: 1;
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--light-gray);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            padding: 15px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .contact-item i {
+            color: var(--primary);
+            margin-top: 3px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .steps::before {
+                display: none;
+            }
+
+            .step {
+                flex: 100%;
+                margin-bottom: 30px;
+            }
+
+            .step-number {
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .newsletter-form input,
+            .newsletter-form button {
+                border-radius: 50px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .plans-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tab-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- (Keep all the same HTML structure from previous version) -->
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">Fresh<span>Prep</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#plans">Meal Plans</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
 
-    <script>
-        document.getElementById('meal-plan-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            generateMealPlan();
-        });
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Gourmet Meal Prep Delivered to Your Door</h1>
+                <p>Fresh, chef-prepared meals customized to your dietary needs. No cooking, no cleaning, just delicious nutrition.</p>
+                <div class="hero-btns">
+                    <a href="#plans" class="btn">Choose Your Plan</a>
+                    <a href="#how-it-works" class="btn btn-outline">How It Works</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        let usedMeals = {
-            Breakfast: [],
-            Lunch: [],
-            Dinner: [],
-            Snack: []
-        };
-
-        function generateMealPlan() {
-            usedMeals = {
-                Breakfast: [],
-                Lunch: [],
-                Dinner: [],
-                Snack: []
-            };
-
-            const name = document.getElementById('name').value;
-            const dietType = document.getElementById('diet-type').value;
-            const calories = parseInt(document.getElementById('calories').value);
-            const days = parseInt(document.getElementById('days').value);
-            
-            const includeBreakfast = document.getElementById('breakfast').checked;
-            const includeLunch = document.getElementById('lunch').checked;
-            const includeDinner = document.getElementById('dinner').checked;
-            const includeSnacks = document.getElementById('snacks').checked;
-            
-            document.getElementById('plan-title').textContent = `${name}'s ${dietType.charAt(0).toUpperCase() + dietType.slice(1)} Meal Plan (${calories} kcal/day)`;
-            
-            const daysContainer = document.getElementById('days-container');
-            daysContainer.innerHTML = '';
-            
-            for (let i = 1; i <= days; i++) {
-                const dayContainer = document.createElement('div');
-                dayContainer.className = 'day-container';
-                dayContainer.innerHTML = `<h3 class="day-header">Day ${i}</h3>`;
-                
-                if (includeBreakfast) {
-                    dayContainer.appendChild(createMealCard('Breakfast', i, dietType, calories));
-                }
-                if (includeLunch) {
-                    dayContainer.appendChild(createMealCard('Lunch', i, dietType, calories));
-                }
-                if (includeDinner) {
-                    dayContainer.appendChild(createMealCard('Dinner', i, dietType, calories));
-                }
-                if (includeSnacks) {
-                    dayContainer.appendChild(createMealCard('Snack', i, dietType, calories));
-                }
-                
-                daysContainer.appendChild(dayContainer);
-            }
-            
-            document.getElementById('preferences-form').style.display = 'none';
-            document.getElementById('meal-plan-results').style.display = 'block';
-        }
-        
-        function createMealCard(mealType, day, diet, targetCalories) {
-            const mealData = getUniqueMeal(mealType, diet, targetCalories);
-            
-            const mealCard = document.createElement('div');
-            mealCard.className = 'meal-card';
-            
-            mealCard.innerHTML = `
-                <span class="meal-type">${mealType}</span>
-                <div class="meal-name">${mealData.name}</div>
-                <div>${mealData.description}</div>
-                <div class="meal-details" id="meal-${day}-${mealType.toLowerCase()}">
-                    <h3>${mealData.name}</h3>
-                    <p>${mealData.description}</p>
-                    
-                    <h4>Macros</h4>
-                    <div class="macro-grid">
-                        <div class="macro-item">
-                            <div>Calories</div>
-                            <div class="macro-value">${mealData.macros.calories}</div>
-                        </div>
-                        <div class="macro-item">
-                            <div>Protein</div>
-                            <div class="macro-value">${mealData.macros.protein}g</div>
-                        </div>
-                        <div class="macro-item">
-                            <div>Carbs</div>
-                            <div class="macro-value">${mealData.macros.carbs}g</div>
-                        </div>
-                        <div class="macro-item">
-                            <div>Fat</div>
-                            <div class="macro-value">${mealData.macros.fat}g</div>
-                        </div>
+    <!-- Features Section -->
+    <section class="section features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose FreshPrep</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
                     </div>
-                    
-                    <h4>Ingredients</h4>
-                    <ul>
-                        ${mealData.ingredients.map(ing => `<li>${ing}</li>`).join('')}
-                    </ul>
-                    
-                    <h4>Instructions</h4>
-                    <div class="instructions">
-                        <ol>
-                            ${mealData.instructions.map(step => `<li>${step}</li>`).join('')}
-                        </ol>
+                    <h3>Fresh Ingredients</h3>
+                    <p>We source only the freshest, highest quality ingredients from local farms and trusted suppliers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Chef-Crafted Meals</h3>
+                    <p>Our award-winning chefs create delicious, nutritionally balanced meals that never sacrifice flavor.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Save Time</h3>
+                    <p>Get back 10+ hours per week by eliminating meal planning, grocery shopping, and cooking.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Healthy Options</h3>
+                    <p>Choose from keto, paleo, vegan, gluten-free and other dietary preferences to match your lifestyle.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h3>Eco-Friendly</h3>
+                    <p>Our packaging is 100% recyclable and we maintain a zero-food-waste policy in our kitchens.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Flexible Delivery</h3>
+                    <p>Get meals delivered weekly or bi-weekly, with easy pause or cancellation options.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meal Plans Section -->
+    <section class="section meal-plans" id="plans">
+        <div class="container">
+            <h2 class="section-title">Our Meal Plans</h2>
+            <div class="plans-tabs">
+                <button class="tab-btn active" data-category="all">All Plans</button>
+                <button class="tab-btn" data-category="weight-loss">Weight Loss</button>
+                <button class="tab-btn" data-category="muscle-gain">Muscle Gain</button>
+                <button class="tab-btn" data-category="plant-based">Plant Based</button>
+                <button class="tab-btn" data-category="family">Family Plans</button>
+            </div>
+            <div class="plans-grid">
+                <div class="plan-card" data-category="weight-loss">
+                    <div class="plan-img">
+                        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1453&q=80" alt="Lean & Clean Plan">
+                    </div>
+                    <div class="plan-content">
+                        <h3 class="plan-title">Lean & Clean</h3>
+                        <div class="plan-price">$11.99 <span>per meal</span></div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> 1,200-1,500 calories/day</li>
+                            <li><i class="fas fa-check"></i> High protein, low carb</li>
+                            <li><i class="fas fa-check"></i> 5 meals per day</li>
+                            <li><i class="fas fa-check"></i> Weekly nutritionist consult</li>
+                            <li><i class="fas fa-check"></i> Free delivery</li>
+                        </ul>
+                        <a href="#" class="btn">Select Plan</a>
                     </div>
                 </div>
-            `;
-            
-            mealCard.addEventListener('click', function() {
-                const details = this.querySelector('.meal-details');
-                details.style.display = details.style.display === 'block' ? 'none' : 'block';
+                <div class="plan-card" data-category="muscle-gain">
+                    <div class="plan-img">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="Performance Fuel Plan">
+                    </div>
+                    <div class="plan-content">
+                        <h3 class="plan-title">Performance Fuel</h3>
+                        <div class="plan-price">$13.99 <span>per meal</span></div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> 2,800-3,200 calories/day</li>
+                            <li><i class="fas fa-check"></i> 40% protein, 40% carbs</li>
+                            <li><i class="fas fa-check"></i> 6 meals per day</li>
+                            <li><i class="fas fa-check"></i> Post-workout recovery meals</li>
+                            <li><i class="fas fa-check"></i> Free delivery</li>
+                        </ul>
+                        <a href="#" class="btn">Select Plan</a>
+                    </div>
+                </div>
+                <div class="plan-card" data-category="plant-based">
+                    <div class="plan-img">
+                        <img src="https://images.unsplash.com/photo-1543351611-58f69d7c1781?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Plant Power Plan">
+                    </div>
+                    <div class="plan-content">
+                        <h3 class="plan-title">Plant Power</h3>
+                        <div class="plan-price">$12.49 <span>per meal</span></div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> 100% plant-based</li>
+                            <li><i class="fas fa-check"></i> 1,800-2,200 calories/day</li>
+                            <li><i class="fas fa-check"></i> 4 meals per day</li>
+                            <li><i class="fas fa-check"></i> High protein options</li>
+                            <li><i class="fas fa-check"></i> Free delivery</li>
+                        </ul>
+                        <a href="#" class="btn">Select Plan</a>
+                    </div>
+                </div>
+                <div class="plan-card" data-category="family">
+                    <div class="plan-img">
+                        <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Family Feast Plan">
+                    </div>
+                    <div class="plan-content">
+                        <h3 class="plan-title">Family Feast</h3>
+                        <div class="plan-price">$9.99 <span>per meal</span></div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> 4-6 servings per meal</li>
+                            <li><i class="fas fa-check"></i> Kid-friendly options</li>
+                            <li><i class="fas fa-check"></i> 5 dinners + 3 lunches</li>
+                            <li><i class="fas fa-check"></i> Customizable preferences</li>
+                            <li><i class="fas fa-check"></i> Free delivery</li>
+                        </ul>
+                        <a href="#" class="btn">Select Plan</a>
+                    </div>
+                </div>
+                <div class="plan-card" data-category="weight-loss">
+                    <div class="plan-img">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Keto Cut Plan">
+                    </div>
+                    <div class="plan-content">
+                        <h3 class="plan-title">Keto Cut</h3>
+                        <div class="plan-price">$12.99 <span>per meal</span></div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> <20g net carbs/day</li>
+                            <li><i class="fas fa-check"></i> High healthy fats</li>
+                            <li><i class="fas fa-check"></i> 3 meals + 2 snacks</li>
+                            <li><i class="fas fa-check"></i> Metabolic support</li>
+                            <li><i class="fas fa-check"></i> Free delivery</li>
+                        </ul>
+                        <a href="#" class="btn">Select Plan</a>
+                    </div>
+                </div>
+                <div class="plan-card" data-category="muscle-gain">
+                    <div class="plan-img">
+                        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1453&q=80" alt="Athlete's Edge Plan">
+                    </div>
+                    <div class="plan-content">
+                        <h3 class="plan-title">Athlete's Edge</h3>
+                        <div class="plan-price">$14.99 <span>per meal</span></div>
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check"></i> 3,500-4,000 calories/day</li>
+                            <li><i class="fas fa-check"></i> Macro-optimized</li>
+                            <li><i class="fas fa-check"></i> 7 meals per day</li>
+                            <li><i class="fas fa-check"></i> Sports nutritionist support</li>
+                            <li><i class="fas fa-check"></i> Free delivery</li>
+                        </ul>
+                        <a href="#" class="btn">Select Plan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How FreshPrep Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Choose Your Plan</h3>
+                    <p>Select from our variety of meal plans tailored to different dietary needs and goals.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Customize Your Meals</h3>
+                    <p>Tell us your preferences, allergies, and delivery schedule through your online account.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Chefs Prepare Your Meals</h3>
+                    <p>Our culinary team cooks your meals fresh using premium ingredients the day before delivery.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Delivery to Your Door</h3>
+                    <p>Receive your freshly prepared meals in insulated packaging to maintain perfect temperature.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Heat & Enjoy</h3>
+                    <p>Simply heat your meals and enjoy restaurant-quality food in the comfort of your home.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>FreshPrep has completely changed my relationship with food. As a busy lawyer, I never had time to cook healthy meals. Now I'm eating better than ever and have lost 15 pounds in 2 months!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah J.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah J.</h4>
+                            <p>Customer for 8 months</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>The muscle gain plan helped me bulk up while keeping my diet clean. The meals are delicious and perfectly portioned. I've seen better results in 3 months than I did in a year of trying to meal prep myself.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael T.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael T.</h4>
+                            <p>Customer for 5 months</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>As a vegan, it's hard to find prepared meals that are both nutritious and flavorful. FreshPrep's plant-based options are incredible! My whole family loves them, even the meat-eaters.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya K.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Priya K.</h4>
+                            <p>Customer for 1 year</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Ready to Transform Your Eating Habits?</h2>
+            <p>Subscribe to our newsletter and get 15% off your first order plus weekly recipes and nutrition tips.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>FreshPrep</h3>
+                    <p>Making healthy eating effortless with chef-prepared meals delivered to your door.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#plans">Meal Plans</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Chefs</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Nutrition Way, San Francisco, CA 94107</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>(800) 555-HEALTH</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>hello@freshprep.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Fri: 8AM-8PM | Sat-Sun: 9AM-6PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FreshPrep. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const header = document.getElementById('header');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
             });
-            
-            return mealCard;
-        }
-        
-        function getUniqueMeal(mealType, diet, targetCalories) {
-            // Get all possible meals for this type and diet
-            const allMeals = getAllMealsForType(mealType, diet);
-            
-            // Filter by calories (within 20% of target)
-            const calorieRange = [targetCalories * 0.8, targetCalories * 1.2];
-            const suitableMeals = allMeals.filter(meal => 
-                meal.macros.calories >= calorieRange[0] && 
-                meal.macros.calories <= calorieRange[1] &&
-                !usedMeals[mealType].includes(meal.name)
-            );
-            
-            if (suitableMeals.length === 0) {
-                // If no perfect matches, get closest available
-                const fallbackMeals = allMeals.filter(meal => 
-                    !usedMeals[mealType].includes(meal.name)
-                );
-                
-                // Sort by calorie difference
-                fallbackMeals.sort((a, b) => 
-                    Math.abs(a.macros.calories - targetCalories) - 
-                    Math.abs(b.macros.calories - targetCalories)
-                );
-                
-                const selected = fallbackMeals[0];
-                usedMeals[mealType].push(selected.name);
-                return selected;
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
-            
-            // Randomly select from suitable meals
-            const selected = suitableMeals[Math.floor(Math.random() * suitableMeals.length)];
-            usedMeals[mealType].push(selected.name);
-            return selected;
-        }
-        
-        function getAllMealsForType(mealType, diet) {
-            // Expanded meal database with more options
-            const meals = {
-                'Breakfast': {
-                    'balanced': [
-                        {
-                            name: "Avocado Toast with Eggs",
-                            description: "Creamy avocado on whole grain toast with poached eggs",
-                            macros: { calories: 450, protein: 18, carbs: 35, fat: 25 },
-                            ingredients: ["2 slices whole grain bread", "1 ripe avocado", "2 eggs", "Salt and pepper"],
-                            instructions: ["Toast bread", "Mash avocado", "Poach eggs", "Assemble and season"]
-                        },
-                        {
-                            name: "Greek Yogurt Parfait",
-                            description: "Yogurt with granola and fresh berries",
-                            macros: { calories: 400, protein: 20, carbs: 45, fat: 15 },
-                            ingredients: ["1 cup Greek yogurt", "1/2 cup granola", "1/2 cup mixed berries", "1 tbsp honey"],
-                            instructions: ["Layer yogurt, granola and berries", "Drizzle with honey"]
-                        },
-                        {
-                            name: "Oatmeal with Nuts",
-                            description: "Steel-cut oats with almonds and banana",
-                            macros: { calories: 500, protein: 15, carbs: 60, fat: 20 },
-                            ingredients: ["1/2 cup steel-cut oats", "1 cup milk", "1/4 cup almonds", "1 banana"],
-                            instructions: ["Cook oats in milk", "Top with sliced banana and almonds"]
-                        }
-                    ],
-                    'keto': [
-                        {
-                            name: "Keto Pancakes",
-                            description: "Fluffy almond flour pancakes with berries",
-                            macros: { calories: 500, protein: 20, carbs: 10, fat: 40 },
-                            ingredients: ["1 cup almond flour", "2 eggs", "1/4 cup almond milk", "1/2 cup berries"],
-                            instructions: ["Mix ingredients", "Cook on griddle", "Serve with berries"]
-                        },
-                        {
-                            name: "Bacon and Eggs",
-                            description: "Classic keto breakfast with avocado",
-                            macros: { calories: 600, protein: 25, carbs: 8, fat: 50 },
-                            ingredients: ["3 strips bacon", "2 eggs", "1/2 avocado", "1 tbsp butter"],
-                            instructions: ["Cook bacon", "Fry eggs in bacon fat", "Serve with sliced avocado"]
-                        },
-                        {
-                            name: "Chia Pudding",
-                            description: "Coconut milk chia pudding with nuts",
-                            macros: { calories: 450, protein: 15, carbs: 12, fat: 35 },
-                            ingredients: ["3 tbsp chia seeds", "1 cup coconut milk", "1/4 cup walnuts", "1 tsp vanilla"],
-                            instructions: ["Mix chia and coconut milk", "Refrigerate overnight", "Top with nuts"]
-                        }
-                    ]
-                },
-                'Lunch': {
-                    'balanced': [
-                        {
-                            name: "Quinoa Salad Bowl",
-                            description: "Protein-packed quinoa with fresh vegetables",
-                            macros: { calories: 550, protein: 22, carbs: 60, fat: 25 },
-                            ingredients: ["1 cup cooked quinoa", "1/2 cup chickpeas", "1/2 cucumber", "1/2 cup cherry tomatoes"],
-                            instructions: ["Combine ingredients", "Add dressing", "Toss and serve"]
-                        },
-                        {
-                            name: "Turkey Wrap",
-                            description: "Whole wheat wrap with turkey and veggies",
-                            macros: { calories: 500, protein: 30, carbs: 45, fat: 20 },
-                            ingredients: ["1 whole wheat wrap", "4 oz turkey", "1/4 avocado", "Lettuce and tomato"],
-                            instructions: ["Layer ingredients on wrap", "Roll tightly", "Cut in half"]
-                        },
-                        {
-                            name: "Salmon Salad",
-                            description: "Grilled salmon over mixed greens",
-                            macros: { calories: 600, protein: 40, carbs: 20, fat: 40 },
-                            ingredients: ["6 oz salmon", "2 cups mixed greens", "1/4 cup feta", "1 tbsp olive oil"],
-                            instructions: ["Grill salmon", "Toss greens with dressing", "Top with salmon and feta"]
-                        }
-                    ],
-                    'keto': [
-                        {
-                            name: "Keto Chicken Caesar",
-                            description: "Romaine with grilled chicken and keto dressing",
-                            macros: { calories: 600, protein: 45, carbs: 8, fat: 45 },
-                            ingredients: ["2 cups romaine", "6 oz chicken", "2 tbsp parmesan", "1/4 cup keto dressing"],
-                            instructions: ["Grill chicken", "Chop romaine", "Combine with dressing and cheese"]
-                        },
-                        {
-                            name: "Bunless Burger",
-                            description: "Beef patty with cheese and bacon",
-                            macros: { calories: 700, protein: 50, carbs: 5, fat: 55 },
-                            ingredients: ["8 oz beef patty", "2 slices cheese", "2 strips bacon", "Lettuce wrap"],
-                            instructions: ["Cook burger and bacon", "Melt cheese on patty", "Serve in lettuce wrap"]
-                        },
-                        {
-                            name: "Zucchini Noodles",
-                            description: "Zoodles with pesto and chicken",
-                            macros: { calories: 550, protein: 40, carbs: 12, fat: 40 },
-                            ingredients: ["2 zucchini", "1/2 cup pesto", "6 oz chicken", "1 tbsp olive oil"],
-                            instructions: ["Spiralize zucchini", "Sauté with pesto", "Top with grilled chicken"]
-                        }
-                    ]
-                },
-                'Dinner': {
-                    'balanced': [
-                        {
-                            name: "Salmon with Vegetables",
-                            description: "Oven-baked salmon with roasted veggies",
-                            macros: { calories: 650, protein: 40, carbs: 35, fat: 35 },
-                            ingredients: ["6 oz salmon", "1 cup mixed vegetables", "1 tbsp olive oil", "Lemon"],
-                            instructions: ["Roast salmon and veggies", "Drizzle with lemon"]
-                        },
-                        {
-                            name: "Chicken Stir Fry",
-                            description: "Chicken with vegetables and brown rice",
-                            macros: { calories: 700, protein: 45, carbs: 60, fat: 25 },
-                            ingredients: ["6 oz chicken", "2 cups veggies", "1/2 cup brown rice", "2 tbsp stir-fry sauce"],
-                            instructions: ["Cook rice", "Stir-fry chicken and veggies", "Combine with sauce"]
-                        },
-                        {
-                            name: "Vegetable Lasagna",
-                            description: "Layered pasta with vegetables and cheese",
-                            macros: { calories: 600, protein: 30, carbs: 55, fat: 30 },
-                            ingredients: ["6 lasagna noodles", "1 cup ricotta", "2 cups veggies", "1 cup marinara"],
-                            instructions: ["Layer ingredients", "Bake at 375°F for 45 min"]
-                        }
-                    ],
-                    'keto': [
-                        {
-                            name: "Steak with Asparagus",
-                            description: "Ribeye with roasted asparagus",
-                            macros: { calories: 800, protein: 50, carbs: 10, fat: 65 },
-                            ingredients: ["8 oz ribeye", "1 bunch asparagus", "2 tbsp butter", "Garlic"],
-                            instructions: ["Sear steak", "Roast asparagus", "Serve with garlic butter"]
-                        },
-                        {
-                            name: "Keto Pizza",
-                            description: "Cauliflower crust pizza with toppings",
-                            macros: { calories: 600, protein: 35, carbs: 12, fat: 45 },
-                            ingredients: ["1 cauliflower crust", "1/2 cup sauce", "1 cup cheese", "Pepperoni"],
-                            instructions: ["Top crust", "Bake at 400°F for 15 min"]
-                        },
-                        {
-                            name: "Shrimp Scampi",
-                            description: "Garlic butter shrimp over zucchini noodles",
-                            macros: { calories: 650, protein: 40, carbs: 15, fat: 50 },
-                            ingredients: ["12 oz shrimp", "2 zucchini", "4 tbsp butter", "Garlic and lemon"],
-                            instructions: ["Sauté shrimp in butter", "Serve over zoodles"]
-                        }
-                    ]
-                },
-                'Snack': {
-                    'balanced': [
-                        {
-                            name: "Yogurt with Nuts",
-                            description: "Greek yogurt with almonds and honey",
-                            macros: { calories: 300, protein: 15, carbs: 25, fat: 15 },
-                            ingredients: ["1 cup Greek yogurt", "2 tbsp almonds", "1 tsp honey"],
-                            instructions: ["Combine ingredients"]
-                        },
-                        {
-                            name: "Apple with Peanut Butter",
-                            description: "Sliced apple with natural peanut butter",
-                            macros: { calories: 250, protein: 8, carbs: 30, fat: 12 },
-                            ingredients: ["1 medium apple", "2 tbsp peanut butter"],
-                            instructions: ["Slice apple", "Serve with peanut butter"]
-                        },
-                        {
-                            name: "Hummus and Veggies",
-                            description: "Fresh vegetables with hummus dip",
-                            macros: { calories: 200, protein: 8, carbs: 20, fat: 10 },
-                            ingredients: ["1/2 cup hummus", "1 cup carrot and celery sticks"],
-                            instructions: ["Serve veggies with hummus"]
-                        }
-                    ],
-                    'keto': [
-                        {
-                            name: "Cheese Roll-Ups",
-                            description: "Sliced cheese wrapped with pepperoni",
-                            macros: { calories: 350, protein: 20, carbs: 2, fat: 30 },
-                            ingredients: ["2 oz cheese", "1 oz pepperoni"],
-                            instructions: ["Roll pepperoni in cheese slices"]
-                        },
-                        {
-                            name: "Keto Fat Bombs",
-                            description: "Coconut oil and nut butter bites",
-                            macros: { calories: 200, protein: 5, carbs: 3, fat: 20 },
-                            ingredients: ["2 tbsp coconut oil", "2 tbsp almond butter", "1 tsp cocoa"],
-                            instructions: ["Mix ingredients", "Freeze in molds"]
-                        },
-                        {
-                            name: "Avocado Egg Salad",
-                            description: "Mashed avocado with hard-boiled eggs",
-                            macros: { calories: 400, protein: 15, carbs: 8, fat: 35 },
-                            ingredients: ["1 avocado", "2 hard-boiled eggs", "1 tbsp mayo"],
-                            instructions: ["Mash ingredients together"]
-                        }
-                    ]
+        });
+
+        // Meal plan tabs filtering
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const planCards = document.querySelectorAll('.plan-card');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const category = btn.dataset.category;
+                
+                // Filter plans
+                planCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
                 }
-            };
-            
-            return meals[mealType][diet] || [];
-        }
-    </script>
-</body>
-</html>
+            });
+        });
     </script>
 </body>
 </html>
