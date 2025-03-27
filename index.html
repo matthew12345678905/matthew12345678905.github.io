@@ -3,78 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Website</title>
+    <title>4D Universe</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        /* Basic styling */
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
             margin: 0;
-            padding: 0;
-            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Welcome Screen */
+        #welcomeScreen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000428, #004e92);
+            color: white;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background-color: #f0f8ff;
+            align-items: center;
+            z-index: 100;
+            cursor: pointer;
         }
         
-        .welcome-screen {
-            padding: 20px;
+        #welcomeScreen h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
         
-        h1 {
-            color: #333;
+        #welcomeScreen p {
+            font-size: 1.2em;
+            opacity: 0.8;
         }
         
-        button {
+        /* Product Buttons */
+        #productButtons {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            z-index: 10;
+        }
+        
+        #productButtons button {
             padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            border: none;
+            border: 1px solid white;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
         }
         
-        button:hover {
-            background-color: #45a049;
+        #productButtons button:hover {
+            background: rgba(255, 255, 255, 0.4);
         }
         
-        .blank-screen {
+        /* Product Pages (Hidden) */
+        .product-page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            color: black;
+            padding: 50px;
             display: none;
-            height: 100vh;
-            background-color: white;
-            align-items: center;
-            justify-content: center;
+            z-index: 20;
         }
         
-        .blank-screen p {
-            font-size: 24px;
-            color: #555;
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5em;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <!-- Welcome Screen -->
-    <div class="welcome-screen" id="welcomeScreen">
-        <h1>Welcome to My Website!</h1>
-        <p>Click the button below to continue.</p>
-        <button onclick="showBlankScreen()">Go to Blank Screen</button>
+    <div id="welcomeScreen" onclick="this.style.display='none'">
+        <h1>ENTER THE 4TH DIMENSION</h1>
+        <p>Click anywhere to begin...</p>
     </div>
     
-    <!-- Blank Screen (hidden by default) -->
-    <div class="blank-screen" id="blankScreen">
-        <p>This is a blank screen.</p>
+    <!-- 3D Scene Container -->
+    <div id="sceneContainer"></div>
+    
+    <!-- Product Buttons -->
+    <div id="productButtons">
+        <button onclick="showProduct('quantum')">Quantum Crystal</button>
+        <button onclick="showProduct('tesseract')">Tesseract Kit</button>
+        <button onclick="showProduct('hyperdrive')">Hyperdrive Fuel</button>
+    </div>
+    
+    <!-- Fake Product Pages -->
+    <div id="quantum" class="product-page">
+        <span class="close-btn" onclick="hideProduct('quantum')">×</span>
+        <h1>Quantum Crystal</h1>
+        <p>Harness the power of parallel universes with this limited-edition crystal.</p>
+        <p><strong>$9,999.99</strong></p>
+        <button>ADD TO CART (OUT OF STOCK)</button>
+    </div>
+    
+    <div id="tesseract" class="product-page">
+        <span class="close-btn" onclick="hideProduct('tesseract')">×</span>
+        <h1>Tesseract Kit</h1>
+        <p>Fold spacetime in your living room! Warning: May cause existential dread.</p>
+        <p><strong>$14,999.99</strong></p>
+        <button>PRE-ORDER</button>
+    </div>
+    
+    <div id="hyperdrive" class="product-page">
+        <span class="close-btn" onclick="hideProduct('hyperdrive')">×</span>
+        <h1>Hyperdrive Fuel</h1>
+        <p>One vial = 1 light-year. Not FDA approved.</p>
+        <p><strong>$499.99 per mL</strong></p>
+        <button>BUY NOW (RESTOCKING SOON)</button>
     </div>
     
     <script>
-        function showBlankScreen() {
-            // Hide welcome screen
-            document.getElementById('welcomeScreen').style.display = 'none';
+        // Initialize Three.js 3D Scene
+        const container = document.getElementById('sceneContainer');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+        
+        // Red Ball
+        const ballGeometry = new THREE.SphereGeometry(1, 32, 32);
+        const ballMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0xff0000, 
+            shininess: 100 
+        });
+        const ball = new THREE.Mesh(ballGeometry, ballMaterial);
+        scene.add(ball);
+        
+        // Tesseract (4D Cube Visualization)
+        const edges = [];
+        const vertices = [
+            [-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1],
+            [-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1]
+        ];
+        
+        // Connect cube edges
+        const cubeEdges = [
+            [0, 1], [1, 2], [2, 3], [3, 0], // Bottom face
+            [4, 5], [5, 6], [6, 7], [7, 4], // Top face
+            [0, 4], [1, 5], [2, 6], [3, 7]  // Vertical edges
+        ];
+        
+        cubeEdges.forEach(edge => {
+            const [a, b] = edge;
+            const geometry = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(...vertices[a]),
+                new THREE.Vector3(...vertices[b])
+            ]);
+            const line = new THREE.Line(geometry, new THREE.LineBasicMaterial({ color: 0x00ffff }));
+            scene.add(line);
+        });
+        
+        // Lighting
+        const light = new THREE.PointLight(0xffffff, 1, 100);
+        light.position.set(5, 5, 5);
+        scene.add(light);
+        scene.add(new THREE.AmbientLight(0x404040));
+        
+        camera.position.z = 5;
+        
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+            ball.rotation.x += 0.01;
+            ball.rotation.y += 0.01;
             
-            // Show blank screen
-            document.getElementById('blankScreen').style.display = 'flex';
+            // Rotate tesseract edges for "4D" effect
+            scene.children.forEach(child => {
+                if (child instanceof THREE.Line) {
+                    child.rotation.y += 0.005;
+                }
+            });
+            
+            renderer.render(scene, camera);
+        }
+        animate();
+        
+        // Handle Window Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Product Page Functions
+        function showProduct(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+        
+        function hideProduct(id) {
+            document.getElementById(id).style.display = 'none';
         }
     </script>
 </body>
