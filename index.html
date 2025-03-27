@@ -3,242 +3,620 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmic Cosmetics</title>
+    <title>Dylan's Dishes - Personalized Meal Plans</title>
     <style>
-        body {
+        :root {
+            --primary: #4CAF50;
+            --primary-light: #81C784;
+            --primary-dark: #388E3C;
+            --secondary: #FF9800;
+            --text: #333;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #fff5f5, #ffebf3);
-            color: #333;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        /* Welcome Screen */
-        #welcomeScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 235, 243, 0.9);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            cursor: pointer;
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text);
+            line-height: 1.6;
         }
-
-        #welcomeScreen h1 {
-            font-size: 3em;
-            color: #ff6b9d;
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
             margin-bottom: 10px;
         }
-
-        #welcomeScreen p {
-            font-size: 1.2em;
-            color: #888;
+        
+        .tagline {
+            font-style: italic;
+            color: rgba(255,255,255,0.9);
         }
-
-        /* Product Sections */
-        .product-section {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            padding: 20px;
-            box-sizing: border-box;
+        
+        .form-container {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
-
-        .product-image {
-            width: 300px;
-            height: 300px;
-            object-fit: contain;
+        
+        .form-group {
             margin-bottom: 20px;
-            filter: drop-shadow(0 10px 15px rgba(255, 107, 157, 0.2));
         }
-
-        .product-info {
-            text-align: center;
-            max-width: 500px;
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
-
-        .product-name {
-            font-size: 1.8em;
-            color: #ff6b9d;
-            margin-bottom: 5px;
-        }
-
-        .product-price {
-            font-size: 1.3em;
-            color: #666;
-            cursor: pointer;
-            text-decoration: underline;
-            transition: color 0.3s;
-            margin-bottom: 15px;
-        }
-
-        .product-price:hover {
-            color: #ff3d7f;
-        }
-
-        .product-description {
-            color: #666;
-            line-height: 1.5;
-        }
-
-        /* Product Pages */
-        .product-detail {
-            position: fixed;
-            top: 0;
-            left: 0;
+        
+        input, select {
             width: 100%;
-            height: 100%;
-            background: white;
-            padding: 50px;
-            display: none;
-            z-index: 200;
-            overflow-y: auto;
-            text-align: center;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
         }
-
-        .detail-image {
-            width: 200px;
-            height: 200px;
-            object-fit: contain;
-            margin: 20px auto;
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
         }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #ff6b9d;
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
         }
-
-        .buy-btn {
-            background: #ff6b9d;
+        
+        .checkbox-item input {
+            width: auto;
+            margin-right: 8px;
+        }
+        
+        button {
+            background-color: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 1em;
-            border-radius: 5px;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
             cursor: pointer;
-            margin-top: 20px;
-            transition: background 0.3s;
+            transition: background-color 0.3s;
         }
-
-        .buy-btn:hover {
-            background: #ff3d7f;
+        
+        button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .meal-plan {
+            display: none;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .day-container {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        
+        .day-container:last-child {
+            border-bottom: none;
+        }
+        
+        .day-header {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        .meal-card {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .meal-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .meal-name {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+        
+        .meal-type {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .meal-details {
+            display: none;
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border: 1px solid #eee;
+        }
+        
+        .meal-details h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .meal-details h4 {
+            margin: 15px 0 8px;
+            color: var(--primary-dark);
+        }
+        
+        .macro-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .macro-item {
+            background-color: var(--light-gray);
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .macro-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .macro-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Welcome Screen -->
-    <div id="welcomeScreen" onclick="this.style.display='none'">
-        <h1>Cosmic Cosmetics</h1>
-        <p>Click to explore our heavenly products</p>
-    </div>
-
-    <!-- Product 1: Lip Balm -->
-    <div class="product-section">
-        <img src="https://i.imgur.com/JqYeZ0U.png" alt="Lip Balm" class="product-image">
-        <div class="product-info">
-            <div class="product-name">Angel's Kiss Lip Balm</div>
-            <div class="product-price" onclick="showProductDetail('lip-balm')">$12.99</div>
-            <p class="product-description">
-                Nourishing lip balm with shea butter and vitamin E for silky smooth lips. 
-                Available in three heavenly flavors.
-            </p>
+    <header>
+        <div class="container">
+            <h1>Dylan's Dishes</h1>
+            <p class="tagline">Personalized meal plans for your dietary needs</p>
         </div>
-    </div>
-
-    <!-- Product 2: Face Balm -->
-    <div class="product-section">
-        <img src="https://i.imgur.com/mXjTzQY.png" alt="Face Balm" class="product-image">
-        <div class="product-info">
-            <div class="product-name">Heavenly Face Balm</div>
-            <div class="product-price" onclick="showProductDetail('face-balm')">$24.99</div>
-            <p class="product-description">
-                Our signature face balm infused with rosehip oil to give your skin 
-                a divine glow that lasts all day.
-            </p>
+    </header>
+    
+    <div class="container">
+        <div class="form-container" id="preferences-form">
+            <h2>Create Your Meal Plan</h2>
+            <form id="meal-plan-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="diet-type">Diet Type</label>
+                    <select id="diet-type" required>
+                        <option value="">Select your diet</option>
+                        <option value="balanced">Balanced</option>
+                        <option value="keto">Keto</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="mediterranean">Mediterranean</option>
+                        <option value="low-carb">Low Carb</option>
+                        <option value="high-protein">High Protein</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="calories">Daily Calorie Target</label>
+                    <input type="number" id="calories" min="1200" max="4000" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="days">Number of Days</label>
+                    <input type="number" id="days" min="1" max="14" value="7" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Meals Per Day</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="breakfast" checked>
+                            <label for="breakfast">Breakfast</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="lunch" checked>
+                            <label for="lunch">Lunch</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="dinner" checked>
+                            <label for="dinner">Dinner</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="snacks" checked>
+                            <label for="snacks">Snacks</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" id="generate-btn">Generate Meal Plan</button>
+            </form>
         </div>
-    </div>
-
-    <!-- Product 3: Lotion -->
-    <div class="product-section">
-        <img src="https://i.imgur.com/vVXJQ3P.png" alt="Body Lotion" class="product-image">
-        <div class="product-info">
-            <div class="product-name">Divine Body Lotion</div>
-            <div class="product-price" onclick="showProductDetail('lotion')">$22.50</div>
-            <p class="product-description">
-                Luxurious lotion with coconut oil and aloe vera for heavenly soft skin 
-                with a light floral fragrance.
-            </p>
+        
+        <div class="meal-plan" id="meal-plan-results">
+            <h2 id="plan-title"></h2>
+            <div id="days-container"></div>
         </div>
-    </div>
-
-    <!-- Product Detail Pages -->
-    <div id="lip-balm" class="product-detail">
-        <span class="close-btn" onclick="hideProductDetail('lip-balm')">×</span>
-        <h1>Angel's Kiss Lip Balm</h1>
-        <img src="https://i.imgur.com/JqYeZ0U.png" alt="Lip Balm" class="detail-image">
-        <p><strong>Flavors:</strong> Vanilla, Berry, Mint</p>
-        <p><strong>Size:</strong> 10ml</p>
-        <p><strong>Key Benefits:</strong></p>
-        <ul style="text-align: left; display: inline-block;">
-            <li>Deeply moisturizes for 24 hours</li>
-            <li>Natural peppermint oil provides subtle plumping effect</li>
-            <li>Vegan and cruelty-free</li>
-        </ul>
-        <p><strong>Price:</strong> $12.99</p>
-        <button class="buy-btn">Add to Cart</button>
-    </div>
-
-    <div id="face-balm" class="product-detail">
-        <span class="close-btn" onclick="hideProductDetail('face-balm')">×</span>
-        <h1>Heavenly Face Balm</h1>
-        <img src="https://i.imgur.com/mXjTzQY.png" alt="Face Balm" class="detail-image">
-        <p><strong>Key Ingredients:</strong> Rosehip oil, shea butter, vitamin E</p>
-        <p><strong>Size:</strong> 50ml</p>
-        <p><strong>Key Benefits:</strong></p>
-        <ul style="text-align: left; display: inline-block;">
-            <li>Reduces appearance of fine lines</li>
-            <li>Non-greasy formula absorbs quickly</li>
-            <li>Dermatologist tested</li>
-        </ul>
-        <p><strong>Price:</strong> $24.99</p>
-        <button class="buy-btn">Add to Cart</button>
-    </div>
-
-    <div id="lotion" class="product-detail">
-        <span class="close-btn" onclick="hideProductDetail('lotion')">×</span>
-        <h1>Divine Body Lotion</h1>
-        <img src="https://i.imgur.com/vVXJQ3P.png" alt="Body Lotion" class="detail-image">
-        <p><strong>Fragrance:</strong> Light floral</p>
-        <p><strong>Size:</strong> 200ml</p>
-        <p><strong>Key Benefits:</strong></p>
-        <ul style="text-align: left; display: inline-block;">
-            <li>48-hour hydration</li>
-            <li>Fast-absorbing, non-sticky formula</li>
-            <li>Paraben-free and hypoallergenic</li>
-        </ul>
-        <p><strong>Price:</strong> $22.50</p>
-        <button class="buy-btn">Add to Cart</button>
     </div>
 
     <script>
-        // Product detail functions
-        function showProductDetail(productId) {
-            document.getElementById(productId).style.display = 'block';
-        }
+        document.getElementById('meal-plan-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            generateMealPlan();
+        });
 
-        function hideProductDetail(productId) {
-            document.getElementById(productId).style.display = 'none';
+        function generateMealPlan() {
+            // Get form values
+            const name = document.getElementById('name').value;
+            const dietType = document.getElementById('diet-type').value;
+            const calories = document.getElementById('calories').value;
+            const days = document.getElementById('days').value;
+            
+            // Check which meals are selected
+            const includeBreakfast = document.getElementById('breakfast').checked;
+            const includeLunch = document.getElementById('lunch').checked;
+            const includeDinner = document.getElementById('dinner').checked;
+            const includeSnacks = document.getElementById('snacks').checked;
+            
+            // Set the plan title
+            document.getElementById('plan-title').textContent = `${name}'s ${dietType.charAt(0).toUpperCase() + dietType.slice(1)} Meal Plan (${calories} kcal/day)`;
+            
+            // Generate days
+            const daysContainer = document.getElementById('days-container');
+            daysContainer.innerHTML = '';
+            
+            for (let i = 1; i <= days; i++) {
+                const dayContainer = document.createElement('div');
+                dayContainer.className = 'day-container';
+                dayContainer.innerHTML = `<h3 class="day-header">Day ${i}</h3>`;
+                
+                if (includeBreakfast) {
+                    dayContainer.appendChild(createMealCard('Breakfast', i, dietType, calories));
+                }
+                if (includeLunch) {
+                    dayContainer.appendChild(createMealCard('Lunch', i, dietType, calories));
+                }
+                if (includeDinner) {
+                    dayContainer.appendChild(createMealCard('Dinner', i, dietType, calories));
+                }
+                if (includeSnacks) {
+                    dayContainer.appendChild(createMealCard('Snack', i, dietType, calories));
+                }
+                
+                daysContainer.appendChild(dayContainer);
+            }
+            
+            // Show results
+            document.getElementById('preferences-form').style.display = 'none';
+            document.getElementById('meal-plan-results').style.display = 'block';
+        }
+        
+        function createMealCard(mealType, day, diet, calories) {
+            // Sample meal data - in a real app this would come from a database
+            const mealData = getSampleMeal(mealType, diet, calories);
+            
+            const mealCard = document.createElement('div');
+            mealCard.className = 'meal-card';
+            
+            mealCard.innerHTML = `
+                <span class="meal-type">${mealType}</span>
+                <div class="meal-name">${mealData.name}</div>
+                <div>${mealData.description}</div>
+                <div class="meal-details" id="meal-${day}-${mealType.toLowerCase()}">
+                    <h3>${mealData.name}</h3>
+                    <p>${mealData.description}</p>
+                    
+                    <h4>Macros</h4>
+                    <div class="macro-grid">
+                        <div class="macro-item">
+                            <div>Calories</div>
+                            <div class="macro-value">${mealData.macros.calories}</div>
+                        </div>
+                        <div class="macro-item">
+                            <div>Protein</div>
+                            <div class="macro-value">${mealData.macros.protein}g</div>
+                        </div>
+                        <div class="macro-item">
+                            <div>Carbs</div>
+                            <div class="macro-value">${mealData.macros.carbs}g</div>
+                        </div>
+                        <div class="macro-item">
+                            <div>Fat</div>
+                            <div class="macro-value">${mealData.macros.fat}g</div>
+                        </div>
+                    </div>
+                    
+                    <h4>Ingredients</h4>
+                    <ul>
+                        ${mealData.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                    </ul>
+                    
+                    <h4>Instructions</h4>
+                    <div class="instructions">
+                        <ol>
+                            ${mealData.instructions.map(step => `<li>${step}</li>`).join('')}
+                        </ol>
+                    </div>
+                </div>
+            `;
+            
+            // Add click event to show details
+            mealCard.addEventListener('click', function() {
+                const details = this.querySelector('.meal-details');
+                details.style.display = details.style.display === 'block' ? 'none' : 'block';
+            });
+            
+            return mealCard;
+        }
+        
+        function getSampleMeal(mealType, diet, targetCalories) {
+            // This is simplified - a real app would have a database of meals
+            const calorieAdjustment = targetCalories / 2000; // Adjust portions based on calorie target
+            
+            const meals = {
+                'Breakfast': {
+                    'balanced': {
+                        name: "Avocado Toast with Eggs",
+                        description: "Creamy avocado on whole grain toast with poached eggs",
+                        macros: {
+                            calories: Math.round(450 * calorieAdjustment),
+                            protein: Math.round(18 * calorieAdjustment),
+                            carbs: Math.round(35 * calorieAdjustment),
+                            fat: Math.round(25 * calorieAdjustment)
+                        },
+                        ingredients: [
+                            "2 slices whole grain bread",
+                            "1 ripe avocado",
+                            "2 eggs",
+                            "Salt and pepper to taste",
+                            "Red pepper flakes (optional)"
+                        ],
+                        instructions: [
+                            "Toast the bread until golden and crisp",
+                            "Mash the avocado and spread evenly on toast",
+                            "Poach the eggs to your liking",
+                            "Place eggs on top of avocado toast",
+                            "Season with salt, pepper, and red pepper flakes"
+                        ]
+                    },
+                    'keto': {
+                        name: "Keto Pancakes with Berries",
+                        description: "Fluffy almond flour pancakes with fresh berries",
+                        macros: {
+                            calories: Math.round(500 * calorieAdjustment),
+                            protein: Math.round(20 * calorieAdjustment),
+                            carbs: Math.round(10 * calorieAdjustment),
+                            fat: Math.round(40 * calorieAdjustment)
+                        },
+                        ingredients: [
+                            "1 cup almond flour",
+                            "2 eggs",
+                            "1/4 cup almond milk",
+                            "1 tbsp coconut oil",
+                            "1/2 cup mixed berries",
+                            "Sugar-free syrup (optional)"
+                        ],
+                        instructions: [
+                            "Mix almond flour, eggs, and almond milk to form a batter",
+                            "Heat coconut oil in a pan over medium heat",
+                            "Pour small amounts of batter to form pancakes",
+                            "Cook until bubbles form, then flip",
+                            "Serve with berries and sugar-free syrup"
+                        ]
+                    }
+                },
+                'Lunch': {
+                    'balanced': {
+                        name: "Quinoa Salad Bowl",
+                        description: "Protein-packed quinoa with fresh vegetables and lemon dressing",
+                        macros: {
+                            calories: Math.round(550 * calorieAdjustment),
+                            protein: Math.round(22 * calorieAdjustment),
+                            carbs: Math.round(60 * calorieAdjustment),
+                            fat: Math.round(25 * calorieAdjustment)
+                        },
+                        ingredients: [
+                            "1 cup cooked quinoa",
+                            "1/2 cup chickpeas",
+                            "1/2 cucumber, diced",
+                            "1/2 cup cherry tomatoes, halved",
+                            "1/4 cup feta cheese",
+                            "2 tbsp olive oil",
+                            "1 tbsp lemon juice",
+                            "Salt and pepper to taste"
+                        ],
+                        instructions: [
+                            "Combine quinoa, chickpeas, cucumber and tomatoes in a bowl",
+                            "Crumble feta cheese on top",
+                            "Whisk together olive oil, lemon juice, salt and pepper",
+                            "Pour dressing over salad and toss gently",
+                            "Serve chilled or at room temperature"
+                        ]
+                    },
+                    'keto': {
+                        name: "Keto Chicken Caesar Salad",
+                        description: "Crispy romaine with grilled chicken and keto-friendly dressing",
+                        macros: {
+                            calories: Math.round(600 * calorieAdjustment),
+                            protein: Math.round(45 * calorieAdjustment),
+                            carbs: Math.round(8 * calorieAdjustment),
+                            fat: Math.round(45 * calorieAdjustment)
+                        },
+                        ingredients: [
+                            "2 cups romaine lettuce",
+                            "1 grilled chicken breast, sliced",
+                            "2 tbsp grated parmesan",
+                            "1/4 cup keto Caesar dressing",
+                            "1/4 cup croutons (pork rinds for strict keto)",
+                            "1 tbsp olive oil"
+                        ],
+                        instructions: [
+                            "Chop romaine lettuce and place in bowl",
+                            "Add sliced grilled chicken",
+                            "Drizzle with olive oil and Caesar dressing",
+                            "Top with parmesan and croutons/pork rinds",
+                            "Toss gently before serving"
+                        ]
+                    }
+                },
+                'Dinner': {
+                    'balanced': {
+                        name: "Salmon with Roasted Vegetables",
+                        description: "Oven-baked salmon with seasonal roasted vegetables",
+                        macros: {
+                            calories: Math.round(650 * calorieAdjustment),
+                            protein: Math.round(40 * calorieAdjustment),
+                            carbs: Math.round(35 * calorieAdjustment),
+                            fat: Math.round(35 * calorieAdjustment)
+                        },
+                        ingredients: [
+                            "1 salmon fillet (6-8 oz)",
+                            "1 cup mixed vegetables (zucchini, bell peppers, carrots)",
+                            "1 tbsp olive oil",
+                            "1 tsp garlic powder",
+                            "1 tsp dried herbs",
+                            "Lemon wedges for serving"
+                        ],
+                        instructions: [
+                            "Preheat oven to 400°F (200°C)",
+                            "Toss vegetables with olive oil and seasonings",
+                            "Place salmon and vegetables on baking sheet",
+                            "Bake for 15-20 minutes until salmon flakes easily",
+                            "Serve with lemon wedges"
+                        ]
+                    },
+                    'keto': {
+                        name: "Beef and Broccoli Stir Fry",
+                        description: "Tender beef strips with broccoli in a savory sauce",
+                        macros: {
+                            calories: Math.round(700 * calorieAdjustment),
+                            protein: Math.round(50 * calorieAdjustment),
+                            carbs: Math.round(12 * calorieAdjustment),
+                            fat: Math.round(50 * calorieAdjustment)
+                        },
+                        ingredients: [
+                            "8 oz beef sirloin, sliced thin",
+                            "2 cups broccoli florets",
+                            "2 tbsp soy sauce (or coconut aminos)",
+                            "1 tbsp sesame oil",
+                            "1 tsp ginger, minced",
+                            "1 clove garlic, minced",
+                            "1/2 tsp erythritol (optional)",
+                            "1 tbsp sesame seeds"
+                        ],
+                        instructions: [
+                            "Heat sesame oil in wok or large pan",
+                            "Add beef and cook until browned, then remove",
+                            "Add broccoli, ginger and garlic to pan",
+                            "Stir fry for 3-4 minutes until broccoli is tender-crisp",
+                            "Return beef to pan, add soy sauce and erythritol",
+                            "Cook for 1 more minute, then top with sesame seeds"
+                        ]
+                    }
+                },
+                'Snack': {
+                    'balanced': {
+                        name: "Greek Yogurt with Nuts and Honey",
+                        description: "Creamy yogurt with crunchy nuts and sweet honey",
+                        macros: {
+                            calories: Math.round(300 * calorieAdjustment),
+                            protein: Math.round(15 * calorieAdjustment),
+                            carbs: Math.round(25 * calorieAdjustment),
+                            fat: Math.round(15 * calorieAdjustment)
+                        },
+                        ingredients: [
+                            "1 cup Greek yogurt",
+                            "2 tbsp mixed nuts",
+                            "1 tsp honey",
+                            "1/4 cup berries (optional)"
+                        ],
+                        instructions: [
+                            "Scoop yogurt into bowl",
+                            "Top with nuts and berries",
+                            "Drizzle with honey",
+                            "Serve immediately"
+                        ]
+                    },
+                    'keto': {
+                        name: "Cheese and Pepperoni Roll-Ups",
+                        description: "Sliced cheese wrapped with pepperoni for a quick keto snack",
+                        macros: {
+                            calories: Math.round(350 * calorieAdjustment),
+                            protein: Math.round(20 * calorieAdjustment),
+                            carbs: Math.round(2 * calorieAdjustment),
+                            fat: Math.round(30 * calorieAdjustment)
+                        },
+                        ingredients: [
+                            "2 oz sliced cheese (cheddar, colby, or pepper jack)",
+                            "1 oz sliced pepperoni",
+                            "1 tbsp cream cheese (optional)"
+                        ],
+                        instructions: [
+                            "Spread cream cheese on cheese slices if using",
+                            "Place pepperoni slices on cheese",
+                            "Roll up tightly",
+                            "Serve immediately or refrigerate for later"
+                        ]
+                    }
+                }
+            };
+            
+            // Return a random meal of the requested type and diet
+            // In a real app, this would select based on nutritional requirements
+            return meals[mealType][diet] || meals[mealType]['balanced'];
         }
     </script>
 </body>
