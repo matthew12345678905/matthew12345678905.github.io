@@ -265,22 +265,37 @@
             margin-right: auto;
         }
 
-        .start-btn {
+        .quiz-type-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .quiz-btn {
             background-color: var(--primary-color);
             color: white;
             border: none;
             padding: 15px 30px;
             border-radius: var(--border-radius);
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             transition: var(--transition);
-            margin-top: 20px;
+            min-width: 200px;
         }
 
-        .start-btn:hover {
+        .quiz-btn:hover {
             background-color: #3a5bef;
             transform: translateY(-2px);
+        }
+
+        .quiz-btn.fill-in {
+            background-color: #6c5ce7;
+        }
+
+        .quiz-btn.fill-in:hover {
+            background-color: #5d4aec;
         }
 
         .quiz-info {
@@ -312,6 +327,24 @@
             color: var(--primary-color);
         }
 
+        .fill-in-container {
+            margin-top: 20px;
+        }
+
+        .fill-in-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .fill-in-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
         @media (max-width: 600px) {
             .container {
                 padding: 10px;
@@ -335,6 +368,15 @@
             
             .score {
                 font-size: 2.5rem;
+            }
+            
+            .quiz-type-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .quiz-btn {
+                width: 100%;
             }
         }
 
@@ -366,27 +408,33 @@
         <div class="start-screen" id="startScreen">
             <h1 class="start-title">Literary Terms Quiz</h1>
             <p class="start-description">
-                Test your knowledge of literary devices and terminology with this interactive quiz. 
-                You'll be presented with 35 multiple-choice questions covering allegory, metaphor, irony, 
-                and many more essential literary concepts.
+                Test your knowledge of literary devices and terminology. Choose between multiple-choice or fill-in-the-blank format.
             </p>
-            <button class="start-btn" id="startBtn">Start Quiz</button>
+            
+            <div class="quiz-type-buttons">
+                <button class="quiz-btn" id="multipleChoiceBtn">
+                    <i class="fas fa-list-ol"></i> Multiple Choice
+                </button>
+                <button class="quiz-btn fill-in" id="fillInBtn">
+                    <i class="fas fa-edit"></i> Fill-in-the-Blank
+                </button>
+            </div>
             
             <div class="quiz-info">
                 <div class="info-card">
                     <i class="fas fa-question-circle"></i>
                     <h3>35 Questions</h3>
-                    <p>Multiple-choice format</p>
+                    <p>Comprehensive coverage</p>
                 </div>
                 <div class="info-card">
-                    <i class="fas fa-book"></i>
-                    <h3>Comprehensive</h3>
-                    <p>Covers all key terms</p>
+                    <i class="fas fa-random"></i>
+                    <h3>Randomized</h3>
+                    <p>Different each time</p>
                 </div>
                 <div class="info-card">
                     <i class="fas fa-trophy"></i>
-                    <h3>Score</h3>
-                    <p>Track your progress</p>
+                    <h3>Two Modes</h3>
+                    <p>Multiple-choice or fill-in</p>
                 </div>
             </div>
         </div>
@@ -403,6 +451,9 @@
             <div class="question-container">
                 <div class="question" id="question"></div>
                 <div class="options-container" id="optionsContainer"></div>
+                <div class="fill-in-container" id="fillInContainer" style="display: none;">
+                    <input type="text" class="fill-in-input" id="fillInInput" placeholder="Type your answer here...">
+                </div>
                 <div class="feedback" id="feedback">
                     <span class="feedback-icon" id="feedbackIcon"></span>
                     <span id="feedbackText"></span>
@@ -416,7 +467,7 @@
         <div class="results-container" id="resultsContainer">
             <h2 class="results-title">Quiz Completed!</h2>
             <div class="score-container">
-                Your Score: <div class="score" id="finalScore">0</div> out of 35
+                Your Score: <div class="score" id="finalScore">0</div> out of <span id="totalQuestions">35</span>
             </div>
             <div id="resultsMessage"></div>
             <button class="restart-btn" id="restartBtn">Take Quiz Again</button>
@@ -425,222 +476,150 @@
 
     <script>
         // Quiz questions data
-        const quizQuestions = [
+        const quizData = [
             {
-                question: "The formation of a word by imitation of a sound (e.g., 'buzz,' 'meow') is called:",
-                options: ["Metaphor", "Onomatopoeia", "Simile", "Diction"],
-                correctAnswer: 1,
-                explanation: "Onomatopoeia refers to words that imitate the sounds they represent."
+                term: "Onomatopoeia",
+                definition: "The formation of a word by imitation of a sound (e.g., 'buzz,' 'meow')"
             },
             {
-                question: "A variety of a language distinguished by pronunciation, grammar, or vocabulary is a:",
-                options: ["Diction", "Dialect", "Narration", "Motif"],
-                correctAnswer: 1,
-                explanation: "A dialect is a regional or social variety of a language distinguished by pronunciation, grammar, or vocabulary."
+                term: "Dialect",
+                definition: "A variety of a language distinguished by pronunciation, grammar, or vocabulary"
             },
             {
-                question: "The use of words to convey a meaning opposite of their literal meaning (e.g., saying 'Great!' when something bad happens) is:",
-                options: ["Irony", "Sarcasm", "Satire", "Paradox"],
-                correctAnswer: 1,
-                explanation: "Sarcasm is a form of verbal irony where the speaker says the opposite of what they mean, often to mock or convey contempt."
+                term: "Sarcasm",
+                definition: "The use of words to convey a meaning opposite of their literal meaning (e.g., saying 'Great!' when something bad happens)"
             },
             {
-                question: "Repetition of a chosen grammatical form within a sentence for balance is called:",
-                options: ["Parallel structure", "Juxtaposition", "Foreshadowing", "Dichotomy"],
-                correctAnswer: 0,
-                explanation: "Parallel structure (or parallelism) is the repetition of a chosen grammatical form within a sentence to create balance and rhythm."
+                term: "Parallel structure",
+                definition: "Repetition of a chosen grammatical form within a sentence for balance"
             },
             {
-                question: "The act of telling a story or providing commentary is called:",
-                options: ["Narration", "Autobiography", "Flashback", "Allegory"],
-                correctAnswer: 0,
-                explanation: "Narration is the act of telling a story or providing commentary, typically by a narrator."
+                term: "Narration",
+                definition: "The act of telling a story or providing commentary"
             },
             {
-                question: "The emotional atmosphere or feeling evoked in a literary work is the:",
-                options: ["Mood", "Theme", "Tone", "Setting"],
-                correctAnswer: 0,
-                explanation: "Mood refers to the emotional atmosphere or feeling that a literary work evokes in the reader."
+                term: "Mood",
+                definition: "The emotional atmosphere or feeling evoked in a literary work"
             },
             {
-                question: "A history of a person's life written by that person is a(n):",
-                options: ["Biography", "Autobiography", "Bildungsroman", "Non-fiction"],
-                correctAnswer: 1,
-                explanation: "An autobiography is a self-written account of the author's own life."
+                term: "Autobiography",
+                definition: "A history of a person's life written by that person"
             },
             {
-                question: "A comparison between two similar things for explanation is a(n):",
-                options: ["Analogy", "Dichotomy", "Metaphor", "Simile"],
-                correctAnswer: 0,
-                explanation: "An analogy is a comparison between two things, typically for the purpose of explanation or clarification."
+                term: "Analogy",
+                definition: "A comparison between two similar things for explanation"
             },
             {
-                question: "A writer's choice of words and style of expression is called:",
-                options: ["Dialect", "Diction", "Voice", "Syntax"],
-                correctAnswer: 1,
-                explanation: "Diction refers to the choice and use of words and phrases in speech or writing."
+                term: "Diction",
+                definition: "A writer's choice of words and style of expression"
             },
             {
-                question: "A symbolic narrative where characters/events represent deeper meanings is a(n):",
-                options: ["Allegory", "Symbolism", "Motif", "Foreshadowing"],
-                correctAnswer: 0,
-                explanation: "An allegory is a story, poem, or picture that can be interpreted to reveal a hidden meaning, typically a moral or political one."
+                term: "Allegory",
+                definition: "A symbolic narrative where characters/events represent deeper meanings"
             },
             {
-                question: "The leading character or hero of a story is the:",
-                options: ["Protagonist", "Foil", "Antagonist", "Narrator"],
-                correctAnswer: 0,
-                explanation: "The protagonist is the main character in a story, often the hero or the character with whom the audience identifies."
+                term: "Protagonist",
+                definition: "The leading character or hero of a story"
             },
             {
-                question: "Hints or clues about what will happen later in the story are called:",
-                options: ["Flashback", "Foreshadowing", "Juxtaposition", "Irony"],
-                correctAnswer: 1,
-                explanation: "Foreshadowing is a literary device where the author gives hints or clues about events that will happen later in the story."
+                term: "Foreshadowing",
+                definition: "Hints or clues about what will happen later in the story"
             },
             {
-                question: "A struggle between opposing forces in a story is the:",
-                options: ["Conflict", "Paradox", "Theme", "Setting"],
-                correctAnswer: 0,
-                explanation: "Conflict is a literary element that involves a struggle between two opposing forces, usually a protagonist and an antagonist."
+                term: "Conflict",
+                definition: "A struggle between opposing forces in a story"
             },
             {
-                question: "'She is as brave as a lion' is an example of a:",
-                options: ["Metaphor", "Simile", "Personification", "Allegory"],
-                correctAnswer: 1,
-                explanation: "A simile is a figure of speech that directly compares two different things using 'like' or 'as'."
+                term: "Simile",
+                definition: "A figure of speech that directly compares two unlike things using 'like' or 'as'"
             },
             {
-                question: "A figure of speech that directly compares two unlike things without 'like' or 'as' is a:",
-                options: ["Simile", "Metaphor", "Analogy", "Onomatopoeia"],
-                correctAnswer: 1,
-                explanation: "A metaphor is a figure of speech that makes a comparison between two unlike things without using 'like' or 'as'."
+                term: "Metaphor",
+                definition: "A figure of speech that directly compares two unlike things without 'like' or 'as'"
             },
             {
-                question: "Literature based on facts and reality (e.g., biographies, essays) is:",
-                options: ["Fiction", "Non-fiction", "Autobiography", "Satire"],
-                correctAnswer: 1,
-                explanation: "Non-fiction is prose writing that is based on facts, real events, and real people, such as biography or history."
+                term: "Non-fiction",
+                definition: "Literature based on facts and reality (e.g., biographies, essays)"
             },
             {
-                question: "The time and place in which a story occurs is the:",
-                options: ["Mood", "Setting", "Theme", "Dystopia"],
-                correctAnswer: 1,
-                explanation: "Setting is the time and place (or when and where) of the story."
+                term: "Setting",
+                definition: "The time and place in which a story occurs"
             },
             {
-                question: "The central idea or message of a literary work is the:",
-                options: ["Theme", "Motif", "Irony", "Voice"],
-                correctAnswer: 0,
-                explanation: "Theme is the central topic or message explored by a literary work."
+                term: "Theme",
+                definition: "The central idea or message of a literary work"
             },
             {
-                question: "Giving human traits to non-human things (e.g., 'The wind whispered') is:",
-                options: ["Personification", "Imagery", "Allusion", "Symbolism"],
-                correctAnswer: 0,
-                explanation: "Personification is a figure of speech where human qualities are given to animals, objects, or ideas."
+                term: "Personification",
+                definition: "Giving human traits to non-human things (e.g., 'The wind whispered')"
             },
             {
-                question: "A scene that interrupts the present action to depict an earlier event is a:",
-                options: ["Flashback", "Foreshadowing", "Juxtaposition", "Paradox"],
-                correctAnswer: 0,
-                explanation: "A flashback is a scene in a movie, novel, etc., set in a time earlier than the main story."
+                term: "Flashback",
+                definition: "A scene that interrupts the present action to depict an earlier event"
             },
             {
-                question: "A statement that contradicts itself but may reveal a truth is a:",
-                options: ["Paradox", "Metaphor", "Allegory", "Irony"],
-                correctAnswer: 0,
-                explanation: "A paradox is a statement that contradicts itself but may nevertheless suggest an important truth."
+                term: "Paradox",
+                definition: "A statement that contradicts itself but may reveal a truth"
             },
             {
-                question: "The philosophical theory emphasizing individual existence, freedom and choice is:",
-                options: ["Existentialism", "Symbolism", "Realism", "Romanticism"],
-                correctAnswer: 0,
-                explanation: "Existentialism is a philosophical theory emphasizing individual existence, freedom, and choice."
+                term: "Existentialism",
+                definition: "The philosophical theory emphasizing individual existence, freedom and choice"
             },
             {
-                question: "A novel about the moral and psychological growth of the main character is a:",
-                options: ["Bildungsroman", "Dystopia", "Satire", "Epic"],
-                correctAnswer: 0,
-                explanation: "A Bildungsroman is a novel about the moral and psychological growth of the main character, typically from youth to adulthood."
+                term: "Bildungsroman",
+                definition: "A novel about the moral and psychological growth of the main character"
             },
             {
-                question: "Placing two elements side by side to present a comparison or contrast is:",
-                options: ["Juxtaposition", "Foreshadowing", "Allusion", "Allegory"],
-                correctAnswer: 0,
-                explanation: "Juxtaposition is the act of placing two elements side by side to present a comparison or contrast."
+                term: "Juxtaposition",
+                definition: "Placing two elements side by side to present a comparison or contrast"
             },
             {
-                question: "The distinctive style or personality of a writer in their work is called:",
-                options: ["Voice", "Diction", "Tone", "Style"],
-                correctAnswer: 0,
-                explanation: "Voice refers to the distinctive style or personality of a writer as expressed in their work."
+                term: "Voice",
+                definition: "The distinctive style or personality of a writer in their work"
             },
             {
-                question: "A recurring element that has symbolic significance in a story is a:",
-                options: ["Motif", "Theme", "Symbol", "Allegory"],
-                correctAnswer: 0,
-                explanation: "A motif is a recurring element that has symbolic significance in a story."
+                term: "Motif",
+                definition: "A recurring element that has symbolic significance in a story"
             },
             {
-                question: "A character who contrasts with another character to highlight particular qualities is a:",
-                options: ["Foil", "Protagonist", "Antagonist", "Narrator"],
-                correctAnswer: 0,
-                explanation: "A foil is a character who contrasts with another character (usually the protagonist) to highlight particular qualities."
+                term: "Foil",
+                definition: "A character who contrasts with another character to highlight particular qualities"
             },
             {
-                question: "A written account of someone's life written by someone else is a:",
-                options: ["Autobiography", "Biography", "Memoir", "Novel"],
-                correctAnswer: 1,
-                explanation: "A biography is a written account of someone's life written by someone else."
+                term: "Biography",
+                definition: "A written account of someone's life written by someone else"
             },
             {
-                question: "An imagined place or state of things where everything is perfect is a:",
-                options: ["Utopia", "Dystopia", "Paradise", "Fantasy"],
-                correctAnswer: 0,
-                explanation: "A utopia is an imagined place or state of things where everything is perfect."
+                term: "Utopia",
+                definition: "An imagined place or state of things where everything is perfect"
             },
             {
-                question: "The use of humor, irony, or ridicule to criticize people's stupidity is:",
-                options: ["Irony", "Satire", "Sarcasm", "Parody"],
-                correctAnswer: 1,
-                explanation: "Satire is the use of humor, irony, or ridicule to criticize people's stupidity or vices."
+                term: "Satire",
+                definition: "The use of humor, irony, or ridicule to criticize people's stupidity"
             },
             {
-                question: "A division or contrast between two things that are opposed or entirely different is a:",
-                options: ["Dichotomy", "Paradox", "Juxtaposition", "Conflict"],
-                correctAnswer: 0,
-                explanation: "A dichotomy is a division or contrast between two things that are opposed or entirely different."
+                term: "Dichotomy",
+                definition: "A division or contrast between two things that are opposed or entirely different"
             },
             {
-                question: "An imagined state or society where there is great suffering or injustice is a:",
-                options: ["Utopia", "Dystopia", "Paradox", "Allegory"],
-                correctAnswer: 1,
-                explanation: "A dystopia is an imagined state or society where there is great suffering or injustice."
+                term: "Dystopia",
+                definition: "An imagined state or society where there is great suffering or injustice"
             },
             {
-                question: "When the subject of a sentence performs the action, it's in:",
-                options: ["Active Voice", "Passive Voice", "First Person", "Third Person"],
-                correctAnswer: 0,
-                explanation: "Active voice is when the subject of a sentence performs the action."
+                term: "Active Voice",
+                definition: "When the subject of a sentence performs the action"
             },
             {
-                question: "When the subject of a sentence receives the action, it's in:",
-                options: ["Active Voice", "Passive Voice", "Second Person", "Omniscient"],
-                correctAnswer: 1,
-                explanation: "Passive voice is when the subject of a sentence receives the action."
+                term: "Passive Voice",
+                definition: "When the subject of a sentence receives the action"
             },
             {
-                question: "A brief and indirect reference to a person, place, thing or idea is an:",
-                options: ["Allusion", "Allegory", "Analogy", "Anecdote"],
-                correctAnswer: 0,
-                explanation: "An allusion is a brief and indirect reference to a person, place, thing or idea of historical, cultural, literary or political significance."
+                term: "Allusion",
+                definition: "A brief and indirect reference to a person, place, thing or idea"
             },
             {
-                question: "The use of symbols to represent ideas or qualities is:",
-                options: ["Symbolism", "Allegory", "Metaphor", "Imagery"],
-                correctAnswer: 0,
-                explanation: "Symbolism is the use of symbols to represent ideas or qualities."
+                term: "Symbolism",
+                definition: "The use of symbols to represent ideas or qualities"
             }
         ];
 
@@ -648,17 +627,21 @@
         const startScreen = document.getElementById('startScreen');
         const quizContainer = document.getElementById('quizContainer');
         const resultsContainer = document.getElementById('resultsContainer');
-        const startBtn = document.getElementById('startBtn');
+        const multipleChoiceBtn = document.getElementById('multipleChoiceBtn');
+        const fillInBtn = document.getElementById('fillInBtn');
         const nextBtn = document.getElementById('nextBtn');
         const restartBtn = document.getElementById('restartBtn');
         const questionElement = document.getElementById('question');
         const optionsContainer = document.getElementById('optionsContainer');
+        const fillInContainer = document.getElementById('fillInContainer');
+        const fillInInput = document.getElementById('fillInInput');
         const progressBar = document.getElementById('progressBar');
         const progressText = document.getElementById('progressText');
         const feedbackElement = document.getElementById('feedback');
         const feedbackIcon = document.getElementById('feedbackIcon');
         const feedbackText = document.getElementById('feedbackText');
         const finalScoreElement = document.getElementById('finalScore');
+        const totalQuestionsElement = document.getElementById('totalQuestions');
         const resultsMessageElement = document.getElementById('resultsMessage');
 
         // Quiz state variables
@@ -666,55 +649,108 @@
         let score = 0;
         let selectedOption = null;
         let quizCompleted = false;
+        let isFillInMode = false;
+        let randomizedQuestions = [];
+        let currentTerm = "";
 
         // Start the quiz
-        startBtn.addEventListener('click', startQuiz);
+        multipleChoiceBtn.addEventListener('click', () => startQuiz(false));
+        fillInBtn.addEventListener('click', () => startQuiz(true));
         restartBtn.addEventListener('click', restartQuiz);
+        fillInInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                checkFillInAnswer();
+            }
+        });
 
         // Start quiz function
-        function startQuiz() {
+        function startQuiz(fillInMode) {
+            isFillInMode = fillInMode;
             startScreen.style.display = 'none';
             quizContainer.style.display = 'block';
             currentQuestionIndex = 0;
             score = 0;
+            
+            // Randomize questions
+            randomizedQuestions = [...quizData];
+            shuffleArray(randomizedQuestions);
+            
+            // Show appropriate question type
+            if (fillInMode) {
+                optionsContainer.style.display = 'none';
+                fillInContainer.style.display = 'block';
+                fillInInput.focus();
+            } else {
+                optionsContainer.style.display = 'grid';
+                fillInContainer.style.display = 'none';
+            }
+            
             loadQuestion();
+        }
+
+        // Shuffle array function
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
         }
 
         // Restart quiz function
         function restartQuiz() {
             resultsContainer.style.display = 'none';
-            quizContainer.style.display = 'block';
-            currentQuestionIndex = 0;
-            score = 0;
-            loadQuestion();
+            startScreen.style.display = 'block';
         }
 
         // Load question function
         function loadQuestion() {
             resetState();
-            if (currentQuestionIndex >= quizQuestions.length) {
+            if (currentQuestionIndex >= randomizedQuestions.length) {
                 showResults();
                 return;
             }
 
-            const currentQuestion = quizQuestions[currentQuestionIndex];
-            questionElement.textContent = currentQuestion.question;
+            const currentQuestion = randomizedQuestions[currentQuestionIndex];
+            currentTerm = currentQuestion.term;
+            
+            if (isFillInMode) {
+                questionElement.textContent = currentQuestion.definition;
+                fillInInput.value = '';
+            } else {
+                questionElement.textContent = currentQuestion.definition;
+                
+                // Generate options (correct answer + 3 random incorrect answers)
+                const options = [currentQuestion.term];
+                const allTerms = quizData.map(item => item.term);
+                
+                while (options.length < 4) {
+                    const randomTerm = allTerms[Math.floor(Math.random() * allTerms.length)];
+                    if (!options.includes(randomTerm)) {
+                        options.push(randomTerm);
+                    }
+                }
+                
+                // Shuffle options
+                shuffleArray(options);
+                const correctIndex = options.indexOf(currentQuestion.term);
+                
+                // Create options
+                options.forEach((option, index) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add('option');
+                    optionElement.innerHTML = `
+                        <span class="option-prefix">${String.fromCharCode(65 + index)}</span>
+                        <span class="option-text">${option}</span>
+                    `;
+                    optionElement.addEventListener('click', () => selectOption(index, correctIndex));
+                    optionsContainer.appendChild(optionElement);
+                });
+            }
 
             // Update progress
-            progressBar.style.width = `${(currentQuestionIndex / quizQuestions.length) * 100}%`;
-            progressText.textContent = `${currentQuestionIndex + 1}/${quizQuestions.length}`;
-
-            // Create options
-            currentQuestion.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.classList.add('option');
-                optionElement.innerHTML = `
-                    <span class="option-prefix">${String.fromCharCode(65 + index)}</span>
-                    <span class="option-text">${option}</span>
-                `;
-                optionElement.addEventListener('click', () => selectOption(index));
-                optionsContainer.appendChild(optionElement);
-            });
+            progressBar.style.width = `${(currentQuestionIndex / randomizedQuestions.length) * 100}%`;
+            progressText.textContent = `${currentQuestionIndex + 1}/${randomizedQuestions.length}`;
+            totalQuestionsElement.textContent = randomizedQuestions.length;
         }
 
         // Reset state function
@@ -726,45 +762,69 @@
             selectedOption = null;
         }
 
-        // Select option function
-        function selectOption(optionIndex) {
+        // Select option function (for multiple choice)
+        function selectOption(optionIndex, correctIndex) {
             if (selectedOption !== null) return;
 
             selectedOption = optionIndex;
             const options = document.querySelectorAll('.option');
             options[optionIndex].classList.add('selected');
 
-            // Check answer
-            const currentQuestion = quizQuestions[currentQuestionIndex];
-            const isCorrect = optionIndex === currentQuestion.correctAnswer;
+            const isCorrect = optionIndex === correctIndex;
 
             if (isCorrect) {
                 options[optionIndex].classList.add('correct');
                 score++;
-                showFeedback(true, currentQuestion.explanation);
+                showFeedback(true, `Correct! The term is "${currentTerm}".`);
             } else {
                 options[optionIndex].classList.add('incorrect');
-                options[currentQuestion.correctAnswer].classList.add('correct');
-                showFeedback(false, currentQuestion.explanation);
+                options[correctIndex].classList.add('correct');
+                showFeedback(false, `Incorrect. The correct term is "${currentTerm}".`);
             }
 
             // Enable next button
             nextBtn.disabled = false;
         }
 
+        // Check fill-in answer function
+        function checkFillInAnswer() {
+            if (fillInInput.value.trim() === "") return;
+            
+            const userAnswer = fillInInput.value.trim().toLowerCase();
+            const correctAnswer = currentTerm.toLowerCase();
+            const isCorrect = userAnswer === correctAnswer;
+            
+            if (isCorrect) {
+                score++;
+                showFeedback(true, `Correct! The term is "${currentTerm}".`);
+            } else {
+                showFeedback(false, `Incorrect. The correct term is "${currentTerm}".`);
+            }
+            
+            // Disable input and enable next button
+            fillInInput.disabled = true;
+            nextBtn.disabled = false;
+        }
+
         // Show feedback function
-        function showFeedback(isCorrect, explanation) {
+        function showFeedback(isCorrect, message) {
             feedbackElement.classList.add(isCorrect ? 'correct' : 'incorrect');
             feedbackIcon.textContent = isCorrect ? '✓' : '✗';
-            feedbackText.textContent = explanation;
+            feedbackText.textContent = message;
             feedbackElement.style.display = 'block';
         }
 
         // Next question function
         nextBtn.addEventListener('click', () => {
             currentQuestionIndex++;
-            if (currentQuestionIndex < quizQuestions.length) {
+            if (isFillInMode) {
+                fillInInput.disabled = false;
+            }
+            if (currentQuestionIndex < randomizedQuestions.length) {
                 loadQuestion();
+                if (isFillInMode) {
+                    fillInInput.focus();
+                }
             } else {
                 showResults();
             }
@@ -777,7 +837,7 @@
             finalScoreElement.textContent = score;
 
             // Calculate percentage
-            const percentage = (score / quizQuestions.length) * 100;
+            const percentage = (score / randomizedQuestions.length) * 100;
 
             // Display message based on score
             let message;
