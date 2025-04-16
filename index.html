@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProteinFuel Cookbook | High-Protein Digital Recipes</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Literary Terms Quiz</title>
     <style>
         :root {
-            --primary: #4a6fa5;
-            --secondary: #166088;
-            --accent: #4fc3a1;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --danger: #dc3545;
-            --success: #28a745;
-            --warning: #ffc107;
+            --primary-color: #4a6bff;
+            --secondary-color: #ff6b6b;
+            --correct-color: #4caf50;
+            --incorrect-color: #f44336;
+            --background-color: #f5f7fa;
+            --text-color: #333;
+            --light-text: #666;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -27,1198 +26,750 @@
         }
 
         body {
-            background-color: var(--light);
-            color: var(--dark);
+            background-color: var(--background-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
 
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
         .container {
-            width: 90%;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 20px;
         }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo i {
-            margin-right: 10px;
-            color: var(--accent);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 1.5rem;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
-            color: white;
-            padding: 5rem 0;
+        header {
             text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-
-        .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin: 1rem 0;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: white;
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn:hover {
-            background-color: #3da58a;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--accent);
-            margin-left: 1rem;
-        }
-
-        .btn-outline:hover {
-            background-color: var(--accent);
-        }
-
-        /* Features Section */
-        .section {
-            padding: 4rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.2rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-
-        .section-title p {
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            margin-bottom: 1rem;
-            color: var(--secondary);
-        }
-
-        /* Cookbook Preview */
-        .cookbook-preview {
-            background-color: var(--light-gray);
-        }
-
-        .preview-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .preview-image {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .preview-image img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .preview-content {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .recipe-count {
-            display: flex;
-            justify-content: space-between;
-            margin: 2rem 0;
-        }
-
-        .count-item {
-            text-align: center;
-            flex: 1;
-        }
-
-        .count-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .count-label {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-
-        /* Sample Recipes */
-        .sample-recipes {
-            background-color: white;
-        }
-
-        .recipe-tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 0.8rem 1.5rem;
-            background-color: var(--light-gray);
-            border: none;
-            border-radius: 50px;
-            margin: 0 0.5rem 1rem;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .tab-btn.active {
-            background-color: var(--accent);
-            color: white;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .recipe-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
-        }
-
-        .recipe-image {
-            height: 250px;
-            overflow: hidden;
-        }
-
-        .recipe-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .recipe-card:hover .recipe-image img {
-            transform: scale(1.05);
-        }
-
-        .recipe-details {
-            padding: 1.5rem;
-        }
-
-        .recipe-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--secondary);
-        }
-
-        .recipe-macros {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .macro-item {
-            text-align: center;
-        }
-
-        .macro-value {
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .macro-label {
-            font-size: 0.8rem;
-            color: var(--gray);
-        }
-
-        .recipe-instructions h3 {
-            margin-bottom: 1rem;
-            color: var(--secondary);
-        }
-
-        .recipe-instructions ol {
-            padding-left: 1.5rem;
-        }
-
-        .recipe-instructions li {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Testimonials */
-        .testimonials {
-            background-color: var(--light-gray);
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .testimonial-content {
-            margin-bottom: 1.5rem;
-            font-style: italic;
-            color: var(--dark);
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: 1rem;
-        }
-
-        .author-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .author-info h4 {
-            margin-bottom: 0.2rem;
-            color: var(--secondary);
-        }
-
-        .author-info p {
-            color: var(--gray);
-            font-size: 0.8rem;
-        }
-
-        .rating {
-            color: var(--warning);
-            margin-bottom: 0.5rem;
-        }
-
-        /* CTA Section */
-        .cta {
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 4rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .cta p {
-            max-width: 700px;
-            margin: 0 auto 2rem;
+        .subtitle {
+            color: var(--light-text);
             font-size: 1.1rem;
         }
 
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-            color: var(--accent);
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-column ul li a {
-            color: var(--light-gray);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-column ul li a:hover {
-            color: var(--accent);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.2rem;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--accent);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            overflow-y: auto;
-        }
-
-        .modal-content {
+        .quiz-container {
             background-color: white;
-            margin: 5% auto;
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 600px;
-            width: 90%;
-            position: relative;
-            animation: modalOpen 0.4s;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin-bottom: 30px;
         }
 
-        @keyframes modalOpen {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray);
-        }
-
-        .close-modal:hover {
-            color: var(--dark);
-        }
-
-        .modal-title {
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--light-gray);
+        .progress-bar {
+            flex-grow: 1;
+            height: 10px;
+            background-color: #eee;
             border-radius: 5px;
+            margin-right: 15px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: var(--transition);
+        }
+
+        .progress-text {
+            font-weight: bold;
+            color: var(--light-text);
+        }
+
+        .timer {
+            display: flex;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .timer i {
+            margin-right: 5px;
+            color: var(--secondary-color);
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .option {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            background-color: #f9f9f9;
+            border-color: var(--primary-color);
+        }
+
+        .option.selected {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .option.correct {
+            background-color: var(--correct-color);
+            color: white;
+            border-color: var(--correct-color);
+        }
+
+        .option.incorrect {
+            background-color: var(--incorrect-color);
+            color: white;
+            border-color: var(--incorrect-color);
+        }
+
+        .option-prefix {
+            font-weight: bold;
+            margin-right: 10px;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+
+        .option-text {
+            flex-grow: 1;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            display: none;
+        }
+
+        .feedback.correct {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid var(--correct-color);
+            display: block;
+        }
+
+        .feedback.incorrect {
+            background-color: rgba(244, 67, 54, 0.1);
+            border-left: 4px solid var(--incorrect-color);
+            display: block;
+        }
+
+        .feedback-icon {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .next-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
             font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: block;
+            margin-left: auto;
         }
 
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--accent);
+        .next-btn:hover {
+            background-color: #3a5bef;
+            transform: translateY(-2px);
         }
 
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
+        .next-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
 
-            nav ul {
-                margin-top: 1rem;
-                flex-direction: column;
-                align-items: center;
-            }
+        .results-container {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
 
-            nav ul li {
-                margin: 0.5rem 0;
-            }
+        .results-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
 
-            .hero h1 {
-                font-size: 2.2rem;
-            }
+        .score-container {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
 
-            .btn-group {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
 
-            .btn-outline {
-                margin-left: 0;
-                margin-top: 1rem;
-            }
+        .restart-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
 
-            .preview-container {
-                flex-direction: column;
+        .restart-btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        .start-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .start-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .start-description {
+            margin-bottom: 30px;
+            color: var(--light-text);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .start-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+
+        .start-btn:hover {
+            background-color: #3a5bef;
+            transform: translateY(-2px);
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .info-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .info-card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .info-card h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .quiz-container {
+                padding: 20px;
+            }
+            
+            .question {
+                font-size: 1.1rem;
+            }
+            
+            .option {
+                padding: 12px;
+            }
+            
+            .results-title {
+                font-size: 1.5rem;
+            }
+            
+            .score {
+                font-size: 2.5rem;
             }
         }
 
-        @media (max-width: 576px) {
-            .mobile-menu-btn {
-                display: block;
-            }
+        /* Animation classes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-            nav {
-                display: none;
-                width: 100%;
-                margin-top: 1rem;
-            }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
 
-            nav.active {
-                display: block;
-            }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
 
-            nav ul {
-                flex-direction: column;
-            }
-
-            nav ul li {
-                margin: 0.5rem 0;
-            }
-
-            .section {
-                padding: 3rem 0;
-            }
-
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-
-            .recipe-count {
-                flex-direction: column;
-                gap: 1rem;
-            }
+        .bounce {
+            animation: bounce 0.5s;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-utensils"></i>
-                    <span>ProteinFuel</span>
-                </div>
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <nav id="mainNav">
-                    <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#preview">Preview</a></li>
-                        <li><a href="#samples">Sample Recipes</a></li>
-                        <li><a href="#testimonials">Reviews</a></li>
-                        <li><a href="#" class="btn" id="buyNowBtn">Buy Now</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>High-Protein Digital Cookbook</h1>
-            <p>40 delicious, protein-packed recipes designed to fuel your body and satisfy your taste buds. Perfect for muscle building, weight loss, or maintaining a healthy lifestyle.</p>
-            <div class="price">$9.99</div>
-            <div class="btn-group">
-                <a href="#" class="btn" id="heroBuyBtn">Get the Cookbook</a>
-                <a href="#samples" class="btn btn-outline">Try Sample Recipes</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="section" id="features">
-        <div class="container">
-            <div class="section-title">
-                <h2>What's Inside</h2>
-                <p>Our high-protein cookbook is packed with everything you need to transform your meals and achieve your fitness goals</p>
-            </div>
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-dumbbell"></i>
-                    </div>
-                    <h3>Muscle Building</h3>
-                    <p>Each recipe is carefully crafted to provide optimal protein intake for muscle growth and recovery.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Quick & Easy</h3>
-                    <p>Most recipes can be prepared in under 30 minutes, perfect for busy lifestyles.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3>Clean Ingredients</h3>
-                    <p>No processed junk - just whole, nutrient-dense foods that nourish your body.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>Energy Boost</h3>
-                    <p>Balanced macros to keep you energized throughout the day without crashes.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Cookbook Preview -->
-    <section class="section cookbook-preview" id="preview">
-        <div class="container">
-            <div class="section-title">
-                <h2>Cookbook Preview</h2>
-                <p>Get a glimpse of what you'll find in our comprehensive high-protein cookbook</p>
-            </div>
-            <div class="preview-container">
-                <div class="preview-image">
-                    <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="ProteinFuel Cookbook Preview">
-                </div>
-                <div class="preview-content">
-                    <h3>40 High-Protein Recipes Across All Categories</h3>
-                    <p>Our cookbook includes a variety of delicious meals to keep your diet interesting and satisfying. From breakfast to dessert, we've got you covered with protein-packed options.</p>
-                    
-                    <div class="recipe-count">
-                        <div class="count-item">
-                            <div class="count-number">10</div>
-                            <div class="count-label">Breakfast Recipes</div>
-                        </div>
-                        <div class="count-item">
-                            <div class="count-number">10</div>
-                            <div class="count-label">Lunch Recipes</div>
-                        </div>
-                        <div class="count-item">
-                            <div class="count-number">10</div>
-                            <div class="count-label">Dinner Recipes</div>
-                        </div>
-                        <div class="count-item">
-                            <div class="count-number">10</div>
-                            <div class="count-label">Desserts & Snacks</div>
-                        </div>
-                    </div>
-                    
-                    <p>Each recipe comes with detailed instructions, nutritional information, and helpful tips for preparation and storage.</p>
-                    <a href="#" class="btn" id="previewBuyBtn">Get Instant Access</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sample Recipes -->
-    <section class="section sample-recipes" id="samples">
-        <div class="container">
-            <div class="section-title">
-                <h2>Try Our Sample Recipes</h2>
-                <p>Experience the quality of our cookbook with these free sample recipes from each category</p>
-            </div>
-            
-            <div class="recipe-tabs">
-                <button class="tab-btn active" data-tab="breakfast">Breakfast</button>
-                <button class="tab-btn" data-tab="lunch">Lunch</button>
-                <button class="tab-btn" data-tab="dinner">Dinner</button>
-                <button class="tab-btn" data-tab="dessert">Dessert</button>
-            </div>
-            
-            <div class="tab-content active" id="breakfast">
-                <div class="recipe-card">
-                    <div class="recipe-image">
-                        <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Protein Pancakes">
-                    </div>
-                    <div class="recipe-details">
-                        <h3 class="recipe-title">Fluffy Protein Pancakes</h3>
-                        <div class="recipe-macros">
-                            <div class="macro-item">
-                                <div class="macro-value">380</div>
-                                <div class="macro-label">CALORIES</div>
-                            </div>
-                            <div class="macro-item">
-                                <div class="macro-value">32g</div>
-                                <div class="macro-label">PROTEIN</div>
-                            </div>
-                            <div class="macro-item">
-                                <div class="macro-value">35g</div>
-                                <div class="macro-label">CARBS</div>
-                            </div>
-                            <div class="macro-item">
-                                <div class="macro-value">10g</div>
-                                <div class="macro-label">FAT</div>
-                            </div>
-                        </div>
-                        <div class="recipe-instructions">
-                            <h3>Instructions</h3>
-                            <ol>
-                                <li>In a large bowl, mix 1 scoop vanilla protein powder, 1/2 cup oat flour, 1 tsp baking powder, and a pinch of salt.</li>
-                                <li>In another bowl, whisk 1 egg, 1/2 cup almond milk, and 1 tsp vanilla extract.</li>
-                                <li>Combine wet and dry ingredients, stirring until just mixed (small lumps are okay).</li>
-                                <li>Heat a non-stick pan over medium heat and lightly coat with cooking spray.</li>
-                                <li>Pour 1/4 cup batter for each pancake and cook until bubbles form on top (about 2-3 minutes).</li>
-                                <li>Flip and cook for another 1-2 minutes until golden brown.</li>
-                                <li>Serve with sugar-free syrup and fresh berries.</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="lunch">
-                <div class="recipe-card">
-                    <div class="recipe-image">
-                        <img src="https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Greek Chicken Bowl">
-                    </div>
-                    <div class="recipe-details">
-                        <h3 class="recipe-title">Greek Chicken Power Bowl</h3>
-                        <div class="recipe-macros">
-                            <div class="macro-item">
-                                <div class="macro-value">420</div>
-                                <div class="macro-label">CALORIES</div>
-                            </div>
-                            <div class="macro-item">
-                                <div class="macro-value">45g</div>
-                                <div class="macro-label">PROTEIN</div>
-                            </div>
-                            <div class="macro-item">
-                                <div class="macro-value">30g</div>
-                                <div class="macro-label">CARBS</div>
-                            </div>
-                            <div class="macro-item">
-                                <div class="macro-value">12g</div>
-                                <div class="macro-label">FAT</div>
-                            </div>
-                        </div>
-                        <div class="recipe-instructions">
-                            <h3>Instructions</h3>
-                            <ol>
-                                <li>Marinate 6 oz chicken breast in 1 tbsp olive oil, juice of 1/2 lemon, 1 tsp oregano, 1 minced garlic clove, salt and pepper for 30 minutes.</li>
-                                <li>Grill or pan-sear chicken until cooked through (165°F internal temp), about 5-6 minutes per side.</li>
-                                <li>Meanwhile, prepare base with 1/2 cup cooked quinoa and 1 cup chopped romaine lettuce.</li>
-                                <li>Top with sliced chicken, 1/4 cup diced cucumber, 1/4 cup cherry tomatoes, 2 tbsp crumbled feta, and 5 kalamata olives.</li>
-                                <li>Drizzle with tzatziki sauce (mix 1/4 cup Greek yogurt with 1 tsp lemon juice, 1/4 tsp dill, and 1/4 tsp garlic powder).</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="dinner">
-                <div class="recipe-card">
-                    <div class="recipe-image">
-                        <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Turkey Meatballs">
-                    </div>
-                    <div class="recipe-details">
-                        <h3 class="recipe-title">Turkey Spinach Meatballs</h3>
-                        <div class="recipe-macros">
-                            <div class="macro-item">
-                                <div class="macro-value">390</div>
-                                <div class="macro-label">CALORIES</div>
-                            </div>
-                            <div class="macro-item">
-                                <div class="macro-value">38g</div>
-                                <div class="macro-label">PROTEIN</div>
-                            </div>
-                            <div class="macro-item">
-                                <div class="macro-value">25g</div>
-                                <div class="macro-label">CARBS</div>
-                            </div>
-                            <div class="macro-item">
-                                <div class="macro-value">14g</div>
-                                <div class="macro-label">FAT</div>
-                            </div>
-                        </div>
-                        <div class="recipe-instructions">
-                            <h3>Instructions</h3>
-                            <ol>
-                                <li>Preheat oven to 400°F and line a baking sheet with parchment paper.</li>
-                                <li>In a large bowl, combine 1 lb lean ground turkey, 1 egg, 1/2 cup chopped spinach, 1/4 cup breadcrumbs, 2 minced garlic cloves, 1 tsp Italian seasoning, 1/2 tsp salt, and 1/4 tsp pepper.</li>
-                                <li>Form into 12 equal-sized meatballs and place on baking sheet.</li>
-                                <li>Bake for 18-20 minutes until internal temperature reaches 165°F.</li>
-                                <li>While meatballs bake, heat 1 cup marinara sauce in a skillet over medium heat.</li>
-                                <li>Add cooked meatballs to sauce and simmer for 5 minutes.</li>
-                                <li>Serve over 1/2 cup whole wheat pasta or zucchini noodles, garnished with fresh basil.</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="dessert">
-                <div class="recipe-card">
-                    <div class="recipe-image">
-                        <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Protein Brownies">
-                    </div>
-                    <div class="recipe-details">
-                        <h3 class="recipe-title">Fudgy Protein Brownies</h3>
-                        <div class="recipe-macros">
-                            <div class="macro-item">
-                                <div class="macro-value">180</div>
-                                <div class="macro-label">CALORIES</div>
-                            </div>
-                            <div class="macro-item">
-                                <div class="macro-value">12g</div>
-                                <div class="macro-label">PROTEIN</div>
-                            </div>
-                            <div class="macro-item">
-                                <div class="macro-value">18g</div>
-                                <div class="macro-label">CARBS</div>
-                            </div>
-                            <div class="macro-item">
-                                <div class="macro-value">8g</div>
-                                <div class="macro-label">FAT</div>
-                            </div>
-                        </div>
-                        <div class="recipe-instructions">
-                            <h3>Instructions</h3>
-                            <ol>
-                                <li>Preheat oven to 350°F and line an 8x8 baking pan with parchment paper.</li>
-                                <li>In a microwave-safe bowl, melt 1/4 cup almond butter and 2 tbsp coconut oil (about 30 seconds).</li>
-                                <li>Stir in 1/4 cup maple syrup, 1 tsp vanilla extract, and 1 egg until smooth.</li>
-                                <li>Add 1 scoop chocolate protein powder, 1/4 cup cocoa powder, 1/4 cup almond flour, and 1/2 tsp baking powder. Mix well.</li>
-                                <li>Fold in 2 tbsp dark chocolate chips (optional).</li>
-                                <li>Spread batter evenly in prepared pan and bake for 12-15 minutes (center should still be slightly soft).</li>
-                                <li>Let cool completely before cutting into 9 squares.</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="section testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>What Our Customers Say</h2>
-                <p>Don't just take our word for it - hear from people who've transformed their meals with our cookbook</p>
-            </div>
-            
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="testimonial-content">
-                        "This cookbook has completely changed my approach to eating. The recipes are easy to follow and packed with flavor. I've never enjoyed eating healthy this much!"
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah J.">
-                        </div>
-                        <div class="author-info">
-                            <h4>Sarah J.</h4>
-                            <p>Fitness Coach</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="testimonial-content">
-                        "As a busy dad, I needed quick meals that would keep me energized. These recipes deliver on both taste and nutrition. My whole family loves them!"
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael T.">
-                        </div>
-                        <div class="author-info">
-                            <h4>Michael T.</h4>
-                            <p>Working Parent</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <div class="testimonial-content">
-                        "I've tried many protein cookbooks before, but this one stands out. The variety keeps me from getting bored, and I've seen real results in my body composition."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Jessica L.">
-                        </div>
-                        <div class="author-info">
-                            <h4>Jessica L.</h4>
-                            <p>Competitive Athlete</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="testimonial-content">
-                        "The dessert recipes alone are worth the price! Finally, guilt-free treats that actually taste amazing and help me hit my protein goals."
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="David K.">
-                        </div>
-                        <div class="author-info">
-                            <h4>David K.</h4>
-                            <p>Food Blogger</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="section cta">
-        <div class="container">
-            <h2>Ready to Transform Your Meals?</h2>
-            <p>Get instant access to 40 delicious high-protein recipes for just $9.99. No subscription, no recurring charges - just great food that fuels your body.</p>
-            <div class="price">$9.99</div>
-            <a href="#" class="btn" id="ctaBuyBtn">Get the Cookbook Now</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>ProteinFuel</h3>
-                    <p>Helping you fuel your body with delicious, protein-packed meals since 2020.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#preview">Preview</a></li>
-                        <li><a href="#samples">Sample Recipes</a></li>
-                        <li><a href="#testimonials">Reviews</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Support</h3>
-                    <ul>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Refund Policy</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Newsletter</h3>
-                    <p>Subscribe for free recipes and nutrition tips.</p>
-                    <form id="newsletterForm">
-                        <div class="form-group">
-                            <input type="email" placeholder="Your email address" required>
-                        </div>
-                        <button type="submit" class="btn">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 ProteinFuel Cookbook. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Purchase Modal -->
-    <div class="modal" id="purchaseModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeModal">&times;</span>
-            <h2 class="modal-title">Get Your High-Protein Cookbook</h2>
-            <p>Complete your purchase to get instant access to all 40 recipes.</p>
-            
-            <form id="purchaseForm">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="payment">Payment Method</label>
-                    <select id="payment" required>
-                        <option value="">Select payment method</option>
-                        <option value="credit">Credit/Debit Card</option>
-                        <option value="paypal">PayPal</option>
-                        <option value="applepay">Apple Pay</option>
-                        <option value="googlepay">Google Pay</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn">Complete Purchase - $9.99</button>
-            </form>
-            
-            <p style="margin-top: 1rem; font-size: 0.9rem; text-align: center;">
-                <i class="fas fa-lock"></i> Your information is secure. We don't store credit card details.
+    <div class="container">
+        <!-- Start Screen -->
+        <div class="start-screen" id="startScreen">
+            <h1 class="start-title">Literary Terms Quiz</h1>
+            <p class="start-description">
+                Test your knowledge of literary devices and terminology with this interactive quiz. 
+                You'll be presented with 20 multiple-choice questions covering allegory, metaphor, irony, 
+                and many more essential literary concepts.
             </p>
+            <button class="start-btn" id="startBtn">Start Quiz</button>
+            
+            <div class="quiz-info">
+                <div class="info-card">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>20 Questions</h3>
+                    <p>Multiple-choice format</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-stopwatch"></i>
+                    <h3>Timed</h3>
+                    <p>60 seconds per question</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Score</h3>
+                    <p>Track your progress</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Container -->
+        <div class="quiz-container" id="quizContainer" style="display: none;">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progressBar"></div>
+                </div>
+                <div class="progress-text" id="progressText">1/20</div>
+                <div class="timer" id="timer">
+                    <i class="fas fa-clock"></i>
+                    <span id="time">60</span>s
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question" id="question"></div>
+                <div class="options-container" id="optionsContainer"></div>
+                <div class="feedback" id="feedback">
+                    <span class="feedback-icon" id="feedbackIcon"></span>
+                    <span id="feedbackText"></span>
+                </div>
+            </div>
+
+            <button class="next-btn" id="nextBtn" disabled>Next Question</button>
+        </div>
+
+        <!-- Results Container -->
+        <div class="results-container" id="resultsContainer">
+            <h2 class="results-title">Quiz Completed!</h2>
+            <div class="score-container">
+                Your Score: <div class="score" id="finalScore">0</div> out of 20
+            </div>
+            <div id="resultsMessage"></div>
+            <button class="restart-btn" id="restartBtn">Take Quiz Again</button>
         </div>
     </div>
 
     <script>
-        // Mobile Menu Toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('active');
-        });
+        // Quiz questions data
+        const quizQuestions = [
+            {
+                question: "The formation of a word by imitation of a sound (e.g., 'buzz,' 'meow') is called:",
+                options: ["Metaphor", "Onomatopoeia", "Simile", "Diction"],
+                correctAnswer: 1,
+                explanation: "Onomatopoeia refers to words that imitate the sounds they represent."
+            },
+            {
+                question: "A variety of a language distinguished by pronunciation, grammar, or vocabulary is a:",
+                options: ["Diction", "Dialect", "Narration", "Motif"],
+                correctAnswer: 1,
+                explanation: "A dialect is a regional or social variety of a language distinguished by pronunciation, grammar, or vocabulary."
+            },
+            {
+                question: "The use of words to convey a meaning opposite of their literal meaning (e.g., saying 'Great!' when something bad happens) is:",
+                options: ["Irony", "Sarcasm", "Satire", "Paradox"],
+                correctAnswer: 1,
+                explanation: "Sarcasm is a form of verbal irony where the speaker says the opposite of what they mean, often to mock or convey contempt."
+            },
+            {
+                question: "Repetition of a chosen grammatical form within a sentence for balance is called:",
+                options: ["Parallel structure", "Juxtaposition", "Foreshadowing", "Dichotomy"],
+                correctAnswer: 0,
+                explanation: "Parallel structure (or parallelism) is the repetition of a chosen grammatical form within a sentence to create balance and rhythm."
+            },
+            {
+                question: "The act of telling a story or providing commentary is called:",
+                options: ["Narration", "Autobiography", "Flashback", "Allegory"],
+                correctAnswer: 0,
+                explanation: "Narration is the act of telling a story or providing commentary, typically by a narrator."
+            },
+            {
+                question: "The emotional atmosphere or feeling evoked in a literary work is the:",
+                options: ["Mood", "Theme", "Tone", "Setting"],
+                correctAnswer: 0,
+                explanation: "Mood refers to the emotional atmosphere or feeling that a literary work evokes in the reader."
+            },
+            {
+                question: "A history of a person's life written by that person is a(n):",
+                options: ["Biography", "Autobiography", "Bildungsroman", "Non-fiction"],
+                correctAnswer: 1,
+                explanation: "An autobiography is a self-written account of the author's own life."
+            },
+            {
+                question: "A comparison between two similar things for explanation is a(n):",
+                options: ["Analogy", "Dichotomy", "Metaphor", "Simile"],
+                correctAnswer: 0,
+                explanation: "An analogy is a comparison between two things, typically for the purpose of explanation or clarification."
+            },
+            {
+                question: "A writer's choice of words and style of expression is called:",
+                options: ["Dialect", "Diction", "Voice", "Syntax"],
+                correctAnswer: 1,
+                explanation: "Diction refers to the choice and use of words and phrases in speech or writing."
+            },
+            {
+                question: "A symbolic narrative where characters/events represent deeper meanings is a(n):",
+                options: ["Allegory", "Symbolism", "Motif", "Foreshadowing"],
+                correctAnswer: 0,
+                explanation: "An allegory is a story, poem, or picture that can be interpreted to reveal a hidden meaning, typically a moral or political one."
+            },
+            {
+                question: "The leading character or hero of a story is the:",
+                options: ["Protagonist", "Foil", "Antagonist", "Narrator"],
+                correctAnswer: 0,
+                explanation: "The protagonist is the main character in a story, often the hero or the character with whom the audience identifies."
+            },
+            {
+                question: "Hints or clues about what will happen later in the story are called:",
+                options: ["Flashback", "Foreshadowing", "Juxtaposition", "Irony"],
+                correctAnswer: 1,
+                explanation: "Foreshadowing is a literary device where the author gives hints or clues about events that will happen later in the story."
+            },
+            {
+                question: "A struggle between opposing forces in a story is the:",
+                options: ["Conflict", "Paradox", "Theme", "Setting"],
+                correctAnswer: 0,
+                explanation: "Conflict is a literary element that involves a struggle between two opposing forces, usually a protagonist and an antagonist."
+            },
+            {
+                question: "'She is as brave as a lion' is an example of a:",
+                options: ["Metaphor", "Simile", "Personification", "Allegory"],
+                correctAnswer: 1,
+                explanation: "A simile is a figure of speech that directly compares two different things using 'like' or 'as'."
+            },
+            {
+                question: "A figure of speech that directly compares two unlike things without 'like' or 'as' is a:",
+                options: ["Simile", "Metaphor", "Analogy", "Onomatopoeia"],
+                correctAnswer: 1,
+                explanation: "A metaphor is a figure of speech that makes a comparison between two unlike things without using 'like' or 'as'."
+            },
+            {
+                question: "Literature based on facts and reality (e.g., biographies, essays) is:",
+                options: ["Fiction", "Non-fiction", "Autobiography", "Satire"],
+                correctAnswer: 1,
+                explanation: "Non-fiction is prose writing that is based on facts, real events, and real people, such as biography or history."
+            },
+            {
+                question: "The time and place in which a story occurs is the:",
+                options: ["Mood", "Setting", "Theme", "Dystopia"],
+                correctAnswer: 1,
+                explanation: "Setting is the time and place (or when and where) of the story."
+            },
+            {
+                question: "The central idea or message of a literary work is the:",
+                options: ["Theme", "Motif", "Irony", "Voice"],
+                correctAnswer: 0,
+                explanation: "Theme is the central topic or message explored by a literary work."
+            },
+            {
+                question: "Giving human traits to non-human things (e.g., 'The wind whispered') is:",
+                options: ["Personification", "Imagery", "Allusion", "Symbolism"],
+                correctAnswer: 0,
+                explanation: "Personification is a figure of speech where human qualities are given to animals, objects, or ideas."
+            },
+            {
+                question: "A scene that interrupts the present action to depict an earlier event is a:",
+                options: ["Flashback", "Foreshadowing", "Juxtaposition", "Paradox"],
+                correctAnswer: 0,
+                explanation: "A flashback is a scene in a movie, novel, etc., set in a time earlier than the main story."
+            }
+        ];
 
-        // Tab Functionality
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Remove active class from all buttons and content
-                tabBtns.forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                // Add active class to clicked button and corresponding content
-                this.classList.add('active');
-                const tabId = this.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
+        // DOM elements
+        const startScreen = document.getElementById('startScreen');
+        const quizContainer = document.getElementById('quizContainer');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const startBtn = document.getElementById('startBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const restartBtn = document.getElementById('restartBtn');
+        const questionElement = document.getElementById('question');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+        const timerElement = document.getElementById('timer');
+        const timeElement = document.getElementById('time');
+        const feedbackElement = document.getElementById('feedback');
+        const feedbackIcon = document.getElementById('feedbackIcon');
+        const feedbackText = document.getElementById('feedbackText');
+        const finalScoreElement = document.getElementById('finalScore');
+        const resultsMessageElement = document.getElementById('resultsMessage');
+
+        // Quiz state variables
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let timer;
+        let timeLeft = 60;
+        let selectedOption = null;
+        let quizCompleted = false;
+
+        // Start the quiz
+        startBtn.addEventListener('click', startQuiz);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        // Start quiz function
+        function startQuiz() {
+            startScreen.style.display = 'none';
+            quizContainer.style.display = 'block';
+            currentQuestionIndex = 0;
+            score = 0;
+            loadQuestion();
+            startTimer();
+        }
+
+        // Restart quiz function
+        function restartQuiz() {
+            resultsContainer.style.display = 'none';
+            quizContainer.style.display = 'block';
+            currentQuestionIndex = 0;
+            score = 0;
+            loadQuestion();
+            startTimer();
+        }
+
+        // Load question function
+        function loadQuestion() {
+            resetState();
+            if (currentQuestionIndex >= quizQuestions.length) {
+                showResults();
+                return;
+            }
+
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+
+            // Update progress
+            progressBar.style.width = `${(currentQuestionIndex / quizQuestions.length) * 100}%`;
+            progressText.textContent = `${currentQuestionIndex + 1}/${quizQuestions.length}`;
+
+            // Create options
+            currentQuestion.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                optionElement.innerHTML = `
+                    <span class="option-prefix">${String.fromCharCode(65 + index)}</span>
+                    <span class="option-text">${option}</span>
+                `;
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
             });
-        });
 
-        // Modal Functionality
-        const modal = document.getElementById('purchaseModal');
-        const openModalBtns = document.querySelectorAll('#buyNowBtn, #heroBuyBtn, #previewBuyBtn, #ctaBuyBtn');
-        const closeModal = document.getElementById('closeModal');
+            // Reset timer for new question
+            resetTimer();
+        }
 
-        openModalBtns.forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            });
-        });
+        // Reset state function
+        function resetState() {
+            nextBtn.disabled = true;
+            feedbackElement.className = 'feedback';
+            feedbackElement.style.display = 'none';
+            optionsContainer.innerHTML = '';
+            selectedOption = null;
+        }
 
-        closeModal.addEventListener('click', function() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
+        // Select option function
+        function selectOption(optionIndex) {
+            if (selectedOption !== null) return;
 
-        window.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
+            selectedOption = optionIndex;
+            const options = document.querySelectorAll('.option');
+            options[optionIndex].classList.add('selected');
+
+            // Check answer
+            const currentQuestion = quizQuestions[currentQuestionIndex];
+            const isCorrect = optionIndex === currentQuestion.correctAnswer;
+
+            if (isCorrect) {
+                options[optionIndex].classList.add('correct');
+                score++;
+                showFeedback(true, currentQuestion.explanation);
+            } else {
+                options[optionIndex].classList.add('incorrect');
+                options[currentQuestion.correctAnswer].classList.add('correct');
+                showFeedback(false, currentQuestion.explanation);
+            }
+
+            // Enable next button
+            nextBtn.disabled = false;
+            clearInterval(timer);
+        }
+
+        // Show feedback function
+        function showFeedback(isCorrect, explanation) {
+            feedbackElement.classList.add(isCorrect ? 'correct' : 'incorrect');
+            feedbackIcon.textContent = isCorrect ? '✓' : '✗';
+            feedbackText.textContent = explanation;
+            feedbackElement.style.display = 'block';
+        }
+
+        // Next question function
+        nextBtn.addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
             }
         });
 
-        // Form Submission
-        document.getElementById('purchaseForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your purchase! You will receive an email with your cookbook shortly.');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            this.reset();
-        });
+        // Show results function
+        function showResults() {
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            finalScoreElement.textContent = score;
 
-        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thanks for subscribing to our newsletter!');
-            this.reset();
-        });
+            // Calculate percentage
+            const percentage = (score / quizQuestions.length) * 100;
 
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
+            // Display message based on score
+            let message;
+            if (percentage >= 90) {
+                message = "Excellent! You're a literary expert!";
+            } else if (percentage >= 70) {
+                message = "Great job! You have a strong understanding of literary terms.";
+            } else if (percentage >= 50) {
+                message = "Good effort! Review the terms you missed to improve.";
+            } else {
+                message = "Keep studying! Review the literary terms and try again.";
+            }
+
+            resultsMessageElement.textContent = message;
+            quizCompleted = true;
+        }
+
+        // Timer functions
+        function startTimer() {
+            resetTimer();
+            timer = setInterval(updateTimer, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            timeLeft = 60;
+            timeElement.textContent = timeLeft;
+        }
+
+        function updateTimer() {
+            timeLeft--;
+            timeElement.textContent = timeLeft;
+
+            if (timeLeft <= 10) {
+                timerElement.style.color = 'red';
+            }
+
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                timeUp();
+            }
+        }
+
+        function timeUp() {
+            if (selectedOption === null) {
+                const options = document.querySelectorAll('.option');
+                options.forEach(option => option.style.pointerEvents = 'none');
+                
+                const currentQuestion = quizQuestions[currentQuestionIndex];
+                options[currentQuestion.correctAnswer].classList.add('correct');
+                
+                showFeedback(false, "Time's up! " + currentQuestion.explanation);
+                nextBtn.disabled = false;
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add any initialization code if needed
         });
     </script>
 </body>
-</html> 
+</html>
