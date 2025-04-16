@@ -90,20 +90,6 @@
             color: var(--light-text);
         }
 
-        .timer {
-            display: flex;
-            align-items: center;
-            background-color: #f0f0f0;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
-
-        .timer i {
-            margin-right: 5px;
-            color: var(--secondary-color);
-        }
-
         .question-container {
             margin-bottom: 30px;
         }
@@ -381,7 +367,7 @@
             <h1 class="start-title">Literary Terms Quiz</h1>
             <p class="start-description">
                 Test your knowledge of literary devices and terminology with this interactive quiz. 
-                You'll be presented with 20 multiple-choice questions covering allegory, metaphor, irony, 
+                You'll be presented with 35 multiple-choice questions covering allegory, metaphor, irony, 
                 and many more essential literary concepts.
             </p>
             <button class="start-btn" id="startBtn">Start Quiz</button>
@@ -389,13 +375,13 @@
             <div class="quiz-info">
                 <div class="info-card">
                     <i class="fas fa-question-circle"></i>
-                    <h3>20 Questions</h3>
+                    <h3>35 Questions</h3>
                     <p>Multiple-choice format</p>
                 </div>
                 <div class="info-card">
-                    <i class="fas fa-stopwatch"></i>
-                    <h3>Timed</h3>
-                    <p>60 seconds per question</p>
+                    <i class="fas fa-book"></i>
+                    <h3>Comprehensive</h3>
+                    <p>Covers all key terms</p>
                 </div>
                 <div class="info-card">
                     <i class="fas fa-trophy"></i>
@@ -411,11 +397,7 @@
                 <div class="progress-bar">
                     <div class="progress" id="progressBar"></div>
                 </div>
-                <div class="progress-text" id="progressText">1/20</div>
-                <div class="timer" id="timer">
-                    <i class="fas fa-clock"></i>
-                    <span id="time">60</span>s
-                </div>
+                <div class="progress-text" id="progressText">1/35</div>
             </div>
 
             <div class="question-container">
@@ -434,7 +416,7 @@
         <div class="results-container" id="resultsContainer">
             <h2 class="results-title">Quiz Completed!</h2>
             <div class="score-container">
-                Your Score: <div class="score" id="finalScore">0</div> out of 20
+                Your Score: <div class="score" id="finalScore">0</div> out of 35
             </div>
             <div id="resultsMessage"></div>
             <button class="restart-btn" id="restartBtn">Take Quiz Again</button>
@@ -563,6 +545,102 @@
                 options: ["Flashback", "Foreshadowing", "Juxtaposition", "Paradox"],
                 correctAnswer: 0,
                 explanation: "A flashback is a scene in a movie, novel, etc., set in a time earlier than the main story."
+            },
+            {
+                question: "A statement that contradicts itself but may reveal a truth is a:",
+                options: ["Paradox", "Metaphor", "Allegory", "Irony"],
+                correctAnswer: 0,
+                explanation: "A paradox is a statement that contradicts itself but may nevertheless suggest an important truth."
+            },
+            {
+                question: "The philosophical theory emphasizing individual existence, freedom and choice is:",
+                options: ["Existentialism", "Symbolism", "Realism", "Romanticism"],
+                correctAnswer: 0,
+                explanation: "Existentialism is a philosophical theory emphasizing individual existence, freedom, and choice."
+            },
+            {
+                question: "A novel about the moral and psychological growth of the main character is a:",
+                options: ["Bildungsroman", "Dystopia", "Satire", "Epic"],
+                correctAnswer: 0,
+                explanation: "A Bildungsroman is a novel about the moral and psychological growth of the main character, typically from youth to adulthood."
+            },
+            {
+                question: "Placing two elements side by side to present a comparison or contrast is:",
+                options: ["Juxtaposition", "Foreshadowing", "Allusion", "Allegory"],
+                correctAnswer: 0,
+                explanation: "Juxtaposition is the act of placing two elements side by side to present a comparison or contrast."
+            },
+            {
+                question: "The distinctive style or personality of a writer in their work is called:",
+                options: ["Voice", "Diction", "Tone", "Style"],
+                correctAnswer: 0,
+                explanation: "Voice refers to the distinctive style or personality of a writer as expressed in their work."
+            },
+            {
+                question: "A recurring element that has symbolic significance in a story is a:",
+                options: ["Motif", "Theme", "Symbol", "Allegory"],
+                correctAnswer: 0,
+                explanation: "A motif is a recurring element that has symbolic significance in a story."
+            },
+            {
+                question: "A character who contrasts with another character to highlight particular qualities is a:",
+                options: ["Foil", "Protagonist", "Antagonist", "Narrator"],
+                correctAnswer: 0,
+                explanation: "A foil is a character who contrasts with another character (usually the protagonist) to highlight particular qualities."
+            },
+            {
+                question: "A written account of someone's life written by someone else is a:",
+                options: ["Autobiography", "Biography", "Memoir", "Novel"],
+                correctAnswer: 1,
+                explanation: "A biography is a written account of someone's life written by someone else."
+            },
+            {
+                question: "An imagined place or state of things where everything is perfect is a:",
+                options: ["Utopia", "Dystopia", "Paradise", "Fantasy"],
+                correctAnswer: 0,
+                explanation: "A utopia is an imagined place or state of things where everything is perfect."
+            },
+            {
+                question: "The use of humor, irony, or ridicule to criticize people's stupidity is:",
+                options: ["Irony", "Satire", "Sarcasm", "Parody"],
+                correctAnswer: 1,
+                explanation: "Satire is the use of humor, irony, or ridicule to criticize people's stupidity or vices."
+            },
+            {
+                question: "A division or contrast between two things that are opposed or entirely different is a:",
+                options: ["Dichotomy", "Paradox", "Juxtaposition", "Conflict"],
+                correctAnswer: 0,
+                explanation: "A dichotomy is a division or contrast between two things that are opposed or entirely different."
+            },
+            {
+                question: "An imagined state or society where there is great suffering or injustice is a:",
+                options: ["Utopia", "Dystopia", "Paradox", "Allegory"],
+                correctAnswer: 1,
+                explanation: "A dystopia is an imagined state or society where there is great suffering or injustice."
+            },
+            {
+                question: "When the subject of a sentence performs the action, it's in:",
+                options: ["Active Voice", "Passive Voice", "First Person", "Third Person"],
+                correctAnswer: 0,
+                explanation: "Active voice is when the subject of a sentence performs the action."
+            },
+            {
+                question: "When the subject of a sentence receives the action, it's in:",
+                options: ["Active Voice", "Passive Voice", "Second Person", "Omniscient"],
+                correctAnswer: 1,
+                explanation: "Passive voice is when the subject of a sentence receives the action."
+            },
+            {
+                question: "A brief and indirect reference to a person, place, thing or idea is an:",
+                options: ["Allusion", "Allegory", "Analogy", "Anecdote"],
+                correctAnswer: 0,
+                explanation: "An allusion is a brief and indirect reference to a person, place, thing or idea of historical, cultural, literary or political significance."
+            },
+            {
+                question: "The use of symbols to represent ideas or qualities is:",
+                options: ["Symbolism", "Allegory", "Metaphor", "Imagery"],
+                correctAnswer: 0,
+                explanation: "Symbolism is the use of symbols to represent ideas or qualities."
             }
         ];
 
@@ -577,8 +655,6 @@
         const optionsContainer = document.getElementById('optionsContainer');
         const progressBar = document.getElementById('progressBar');
         const progressText = document.getElementById('progressText');
-        const timerElement = document.getElementById('timer');
-        const timeElement = document.getElementById('time');
         const feedbackElement = document.getElementById('feedback');
         const feedbackIcon = document.getElementById('feedbackIcon');
         const feedbackText = document.getElementById('feedbackText');
@@ -588,8 +664,6 @@
         // Quiz state variables
         let currentQuestionIndex = 0;
         let score = 0;
-        let timer;
-        let timeLeft = 60;
         let selectedOption = null;
         let quizCompleted = false;
 
@@ -604,7 +678,6 @@
             currentQuestionIndex = 0;
             score = 0;
             loadQuestion();
-            startTimer();
         }
 
         // Restart quiz function
@@ -614,7 +687,6 @@
             currentQuestionIndex = 0;
             score = 0;
             loadQuestion();
-            startTimer();
         }
 
         // Load question function
@@ -643,9 +715,6 @@
                 optionElement.addEventListener('click', () => selectOption(index));
                 optionsContainer.appendChild(optionElement);
             });
-
-            // Reset timer for new question
-            resetTimer();
         }
 
         // Reset state function
@@ -681,7 +750,6 @@
 
             // Enable next button
             nextBtn.disabled = false;
-            clearInterval(timer);
         }
 
         // Show feedback function
@@ -725,45 +793,6 @@
 
             resultsMessageElement.textContent = message;
             quizCompleted = true;
-        }
-
-        // Timer functions
-        function startTimer() {
-            resetTimer();
-            timer = setInterval(updateTimer, 1000);
-        }
-
-        function resetTimer() {
-            clearInterval(timer);
-            timeLeft = 60;
-            timeElement.textContent = timeLeft;
-        }
-
-        function updateTimer() {
-            timeLeft--;
-            timeElement.textContent = timeLeft;
-
-            if (timeLeft <= 10) {
-                timerElement.style.color = 'red';
-            }
-
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                timeUp();
-            }
-        }
-
-        function timeUp() {
-            if (selectedOption === null) {
-                const options = document.querySelectorAll('.option');
-                options.forEach(option => option.style.pointerEvents = 'none');
-                
-                const currentQuestion = quizQuestions[currentQuestionIndex];
-                options[currentQuestion.correctAnswer].classList.add('correct');
-                
-                showFeedback(false, "Time's up! " + currentQuestion.explanation);
-                nextBtn.disabled = false;
-            }
         }
 
         // Initialize
